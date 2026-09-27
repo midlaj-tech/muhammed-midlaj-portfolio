@@ -32,3 +32,11 @@ Thumbs.db
 .vscode/
 *.sublime-project
 *.sublime-workspace
+
+# Android Build Outputs & Gradle Caches
+android/.gradle/
+android/app/build/
+android/build/
+*.apk
+*.aab
+.gradle/

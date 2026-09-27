@@ -99,6 +99,7 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetJavaScriptEnabled")
     private fun configureWebView() {
+        WebView.setWebContentsDebuggingEnabled(true)
         val settings = webView.settings
         settings.javaScriptEnabled = true
         settings.domStorageEnabled = true
@@ -109,6 +110,9 @@ class MainActivity : AppCompatActivity() {
         settings.loadWithOverviewMode = true
         settings.cacheMode = WebSettings.LOAD_DEFAULT
         settings.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
+
+        CookieManager.getInstance().setAcceptCookie(true)
+        CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true)
 
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
         webView.addJavascriptInterface(AndroidBridge(), "AndroidBridge")
@@ -160,6 +164,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         webView.webChromeClient = object : WebChromeClient() {
+            override fun onConsoleMessage(consoleMessage: ConsoleMessage?): Boolean {
+                consoleMessage?.let {
+                    android.util.Log.d("WebViewConsole", "${it.messageLevel()}: ${it.message()} [${it.sourceId()}:${it.lineNumber()}]")
+                }
+                return super.onConsoleMessage(consoleMessage)
+            }
+
             override fun onShowFileChooser(
                 webView: WebView?,
                 filePathCallback: ValueCallback<Array<Uri>>?,
@@ -268,7 +279,7 @@ class MainActivity : AppCompatActivity() {
                         showToast('Pixel 8 Biometric Verified • Welcome Midlaj!', '');
                     }
                 } catch(e) {
-                    console.error('Biometric session injection error:', e);
+                    console.error('Biometric session injection error: ' + (e && e.name) + ' - ' + (e && e.message) + ' stack: ' + (e && e.stack));
                 }
             })();
         """.trimIndent()
