@@ -40,6 +40,7 @@ jobs:
       - name: Copy Built Web Assets to Android Assets Directory
         run: |
           mkdir -p android/app/src/main/assets/www
+          cp -r dist/* android/app/src/main/assets/
           cp -r dist/* android/app/src/main/assets/www/
 
       - name: Set up JDK 17

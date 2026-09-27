@@ -222,6 +222,16 @@ function initAuthFlow() {
     });
   }
 
+  // Native Android Biometric Unlock Event Listener
+  window.addEventListener('biometric-auth-success', () => {
+    sessionStorage.removeItem('admin_failed_attempts');
+    sessionStorage.removeItem('admin_lockout_until');
+    loginView.style.display = 'none';
+    workspaceView.style.display = 'block';
+    updateAllAdminViews();
+    showToast('Pixel 8 Verified • Welcome Midlaj!', '');
+  });
+
   // Submit Login with rate-limiting & hash authentication
   if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
@@ -1756,4 +1766,10 @@ function sanitizeUrl(url, fallback = '#') {
     return trimmed;
   }
   return fallback;
+}
+
+// Global exposure for AndroidBridge session injection and external control
+if (typeof window !== 'undefined') {
+  window.updateAllAdminViews = updateAllAdminViews;
+  window.showToast = showToast;
 }

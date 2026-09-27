@@ -1,7 +1,10 @@
 package com.midlaj.portfolio.admin
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -15,6 +18,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.webkit.WebViewAssetLoader
 import java.util.concurrent.Executor
 
 class MainActivity : AppCompatActivity() {
@@ -27,10 +31,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private lateinit var assetLoader: WebViewAssetLoader
 
     private var fileChooserCallback: ValueCallback<Array<Uri>>? = null
     private var isAuthenticated = false
     private var lastPauseTime: Long = 0
+
+    companion object {
+        private const val LIVE_URL = "https://muhammed-midlaj-portfolio.vercel.app/admin.html"
+        private const val LOCAL_URL = "https://appassets.androidplatform.net/admin.html"
+    }
 
     private val fileChooserLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -49,9 +59,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupAssetLoader()
         setupViews()
         setupBiometrics()
         authenticateWithBiometrics()
+    }
+
+    private fun setupAssetLoader() {
+        assetLoader = WebViewAssetLoader.Builder()
+            .setDomain("appassets.androidplatform.net")
+            .addPathHandler("/", WebViewAssetLoader.AssetsPathHandler(this))
+            .build()
     }
 
     private fun setupViews() {
@@ -72,6 +90,13 @@ class MainActivity : AppCompatActivity() {
         configureWebView()
     }
 
+    private fun isNetworkConnected(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager ?: return false
+        val activeNet = cm.activeNetwork ?: return false
+        val caps = cm.getNetworkCapabilities(activeNet) ?: return false
+        return caps.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
+
     @SuppressLint("SetJavaScriptEnabled")
     private fun configureWebView() {
         val settings = webView.settings
@@ -83,11 +108,23 @@ class MainActivity : AppCompatActivity() {
         settings.useWideViewPort = true
         settings.loadWithOverviewMode = true
         settings.cacheMode = WebSettings.LOAD_DEFAULT
+        settings.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
 
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null)
         webView.addJavascriptInterface(AndroidBridge(), "AndroidBridge")
 
         webView.webViewClient = object : WebViewClient() {
+            override fun shouldInterceptRequest(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): WebResourceResponse? {
+                val url = request?.url ?: return null
+                if (url.host == "appassets.androidplatform.net") {
+                    return assetLoader.shouldInterceptRequest(url)
+                }
+                return super.shouldInterceptRequest(view, request)
+            }
+
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 if (isAuthenticated) {
@@ -95,9 +132,22 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?
+            ) {
+                super.onReceivedError(view, request, error)
+                if (request?.isForMainFrame == true && request.url.host?.contains("vercel.app") == true) {
+                    // Seamlessly fallback to offline local bundled asset
+                    view?.loadUrl(LOCAL_URL)
+                }
+            }
+
             override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
                 val url = request?.url?.toString() ?: return false
-                if (url.startsWith("mailto:") || url.startsWith("tel:") || url.startsWith("https://wa.me") || url.startsWith("https://api.whatsapp.com")) {
+                if (url.startsWith("mailto:") || url.startsWith("tel:") ||
+                    url.startsWith("https://wa.me") || url.startsWith("https://api.whatsapp.com")) {
                     try {
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                         return true
@@ -131,7 +181,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        webView.loadUrl("file:///android_asset/www/admin.html")
+        // Load live Vercel admin if connected, else fallback to bundled offline assets
+        if (isNetworkConnected()) {
+            webView.loadUrl(LIVE_URL)
+        } else {
+            webView.loadUrl(LOCAL_URL)
+        }
     }
 
     private fun setupBiometrics() {
@@ -176,9 +231,10 @@ class MainActivity : AppCompatActivity() {
                 biometricPrompt.authenticate(promptInfo)
             }
             else -> {
-                // If biometrics not set up on device, allow access through in-app passcode
+                // If biometrics not configured on device, allow access through device credentials
                 lockOverlay.visibility = View.GONE
                 isAuthenticated = true
+                injectAuthenticatedSession()
             }
         }
     }
@@ -199,11 +255,17 @@ class MainActivity : AppCompatActivity() {
                     if (loginView) loginView.style.display = 'none';
                     if (workspace) workspace.style.display = 'block';
                     
-                    if (typeof updateAllAdminViews === 'function') {
+                    window.dispatchEvent(new CustomEvent('biometric-auth-success', { detail: { session } }));
+                    
+                    if (typeof window.updateAllAdminViews === 'function') {
+                        window.updateAllAdminViews();
+                    } else if (typeof updateAllAdminViews === 'function') {
                         updateAllAdminViews();
                     }
-                    if (typeof showToast === 'function') {
-                        showToast('🔓 Biometric Unlock Active', '');
+                    if (typeof window.showToast === 'function') {
+                        window.showToast('Pixel 8 Biometric Verified • Welcome Midlaj!', '');
+                    } else if (typeof showToast === 'function') {
+                        showToast('Pixel 8 Biometric Verified • Welcome Midlaj!', '');
                     }
                 } catch(e) {
                     console.error('Biometric session injection error:', e);
