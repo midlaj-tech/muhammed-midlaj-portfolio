@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ios-li-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A66C2"/>
+      <stop offset="100%" stop-color="#00488F"/>
+    </linearGradient>
+    <filter id="ios-li-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#00224A" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <!-- Apple Squircle Base -->
+  <rect width="100" height="100" rx="22.5" fill="url(#ios-li-bg)"/>
+  <rect width="98" height="98" x="1" y="1" rx="21.5" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+  
+  <!-- LinkedIn "in" Lettermark -->
+  <g filter="url(#ios-li-shadow)">
+    <path fill="#FFFFFF" d="M26 38.5 h11 v33 h-11 z M31.5 24 a6 6 0 1 1 0 12 a6 6 0 0 1 0 -12 z M44 38.5 h10.5 v4.8 h0.2 c1.5-2.8 5.1-5.8 10.6-5.8 c11.3 0 13.4 7.4 13.4 17.1 v16.9 h-11 v-15 c0-3.6-0.1-8.2-5-8.2 c-5 0-5.8 3.9-5.8 7.9 v15.3 h-11 z"/>
+  </g>
+</svg>

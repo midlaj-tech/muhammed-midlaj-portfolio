@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="ios-phone-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3CE066"/>
+      <stop offset="100%" stop-color="#24B338"/>
+    </linearGradient>
+    <filter id="ios-phone-shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#0E5E1C" flood-opacity="0.32"/>
+    </filter>
+  </defs>
+  <!-- Apple Squircle Base -->
+  <rect width="100" height="100" rx="22.5" fill="url(#ios-phone-bg)"/>
+  <rect width="98" height="98" x="1" y="1" rx="21.5" fill="none" stroke="rgba(255,255,255,0.32)" stroke-width="1.2"/>
+  
+  <!-- Apple Phone Handset (Oriented upper-right to lower-left matching iOS Phone app) -->
+  <g filter="url(#ios-phone-shadow)">
+    <path fill="#FFFFFF" d="M72.8 69.4 c-2.2 2.2-5.1 3.4-8.1 3.4-6.4 0-17.5-7.4-26.6-16.5S21.6 36 21.6 29.6 c0-3 1.2-5.9 3.4-8.1 l5.2-5.2 c2.2-2.2 5.6-2.2 7.8 0 l7.4 7.4 c2.2 2.2 2.2 5.6 0 7.8 l-3.1 3.1 c-.5.5-.6 1.3-.3 1.9 1.8 4.5 6.7 12.3 12.7 18.3 6 6 13.8 10.9 18.3 12.7.6.3 1.4.2 1.9-.3 l3.1-3.1 c2.2-2.2 5.6-2.2 7.8 0 l7.4 7.4 c2.2 2.2 2.2 5.6 0 7.8 l-5.4 5.2 z" transform="translate(100, 0) scale(-1, 1)"/>
+  </g>
+</svg>
