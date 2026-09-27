@@ -1,0 +1,2354 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Muhammed Midlaj K | iOS Engineer</title>
+  <meta name="description" content="Portfolio of Muhammed Midlaj K, iOS Engineer specializing in Swift, SwiftUI, Apple Human Interface Guidelines, and modern full-stack web applications." />
+  <meta name="keywords" content="Muhammed Midlaj K, iOS Engineer, Swift Developer, SwiftUI, Apple Music Liquid UI, Full-Stack Developer, Antigravity, Claude Code, Cursor, iOS Apps" />
+  <meta name="author" content="Muhammed Midlaj K" />
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Muhammed Midlaj K — iOS Engineer" />
+  <meta property="og:description" content="Apple Music & iOS Control Center Liquid Glass portfolio. Explore native iOS apps, Swift projects, skills, and resume." />
+  <meta property="og:image" content="/images/MyPic.png" />
+
+  <!-- Security & Privacy Policies -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto: tel:;" />
+
+  <!-- Native Apple SF Pro & Device Typography -->
+  <script type="module" crossorigin src="/assets/main-CQqt3_9F.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/data-store-CzXnDRFr.js">
+  <link rel="stylesheet" crossorigin href="/assets/data-store-BjctxMXP.css">
+</head>
+<body>
+
+  <!-- Dynamic Ambient Gradient Mesh (Apple Music Now-Playing Color Bleed) -->
+  <div class="ambient-mesh-wrapper" aria-hidden="true">
+    <div class="mesh-orb orb-1"></div>
+    <div class="mesh-orb orb-2"></div>
+    <div class="mesh-orb orb-3"></div>
+    <div class="mesh-orb orb-4"></div>
+    <canvas id="ambient-canvas"></canvas>
+  </div>
+
+  <!-- Global iOS-Style Liquid Glass Mini Hover Popup (Follows cursor for links and interactive targets) -->
+  <div class="apple-mini-popup" id="apple-mini-popup" aria-hidden="true">
+    <div class="popup-glass-content">
+      <span class="popup-icon" id="popup-icon">↗</span>
+      <span class="popup-text" id="popup-text">Open link</span>
+    </div>
+    <div class="popup-pointer"></div>
+  </div>
+
+  <!-- Main Floating Glass Navigation Bar (Condenses smoothly on Scroll like Apple Music Mini-Player) -->
+  <header class="glass-nav-wrapper">
+    <nav class="glass-nav" id="main-nav" aria-label="Main Navigation">
+      <div class="nav-brand-container">
+        <a href="#hero" class="nav-brand" aria-label="Muhammed Midlaj K - Home" data-tooltip="Muhammed Midlaj K • iOS Engineer" data-icon="">
+          <!-- Docked photo in navbar (transitions in from hero) -->
+          <div class="brand-avatar-box" id="nav-brand-avatar">
+            <img src="/images/MyPic.png" alt="Muhammed Midlaj K" class="nav-avatar-img" />
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">Muhammed Midlaj K</span>
+            <div class="brand-sub-wrapper">
+              <span class="brand-subtitle default-sub">
+                <img src="/images/Apple.png" alt="Apple" class="inline-apple-logo nav-apple-logo" />
+                <span>iOS Engineer</span>
+              </span>
+              <div class="nav-condensed-info" id="nav-condensed-info" aria-hidden="true">
+                <span class="condensed-status-dot"></span>
+                <span class="condensed-title" id="condensed-active-section">Overview</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navigation links with Apple Music 3D Liquid Glider -->
+      <div class="nav-links-container" id="nav-menu">
+        <ul class="nav-links" id="desktop-nav-links">
+          <div class="nav-glider" id="nav-glider" aria-hidden="true"></div>
+          <li><a href="#hero" class="nav-link active" data-section="hero" data-tooltip="Overview & Introduction" data-icon="✦">Overview</a></li>
+          <li><a href="#skills" class="nav-link" data-section="skills" data-tooltip="Swift, Architecture & Hardware" data-icon="⚡">Skills</a></li>
+          <li><a href="#modern-tools" class="nav-link" data-section="modern-tools" data-tooltip="Antigravity, Claude Code & Cursor" data-icon="🤖">AI Tools</a></li>
+          <li><a href="#projects" class="nav-link" data-section="projects" data-tooltip="iOS Apps & Projects" data-icon="📱">Projects</a></li>
+          <li><a href="#experience" class="nav-link" data-section="experience" data-tooltip="Work Experience & Milestones" data-icon="💼">Experience</a></li>
+          <li><a href="#blogs" class="nav-link" data-section="blogs" data-tooltip="Technical Blogs & Case Studies" data-icon="✍️">Blogs</a></li>
+          <li><a href="#contact" class="nav-link" data-section="contact" data-tooltip="Direct Contact & Channels" data-icon="✉">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Nav Actions: Apple iOS Theme Switch & Resume Pill -->
+      <div class="nav-actions">
+        <!-- Apple iOS Pill Switch for Theme Override -->
+        <div class="ios-switch-wrapper" data-tooltip="Toggle Dark / Light Appearance" data-icon="◐">
+          <span class="switch-label-icon switch-sun-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </span>
+          <label class="ios-switch" for="theme-toggle">
+            <input type="checkbox" id="theme-toggle" aria-label="Toggle dark mode" />
+            <span class="ios-switch-slider"></span>
+          </label>
+          <span class="switch-label-icon switch-moon-icon" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </div>
+
+        <a href="#contact" class="glass-pill-btn nav-cta-btn" data-tooltip="Send a direct message" data-icon="✉">
+          <span>Get in Touch</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Open menu" aria-expanded="false" data-tooltip="Toggle Menu" data-icon="☰">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main id="main-content">
+
+    <!-- 1. Hero / Intro Section (Apple Centered Showcase Layout) -->
+    <section id="hero" class="hero-section hero-centered-layout" aria-labelledby="hero-title">
+      <div class="content-container">
+        <div class="hero-centered-inner">
+          
+          <!-- Hero User Photo & Status Row -->
+          <div class="hero-avatar-status-row">
+            <!-- Midlaj's Photo with smooth corner transition logic -->
+            <div class="hero-photo-container" id="hero-photo-anchor">
+              <div class="hero-photo-glass-ring" id="hero-profile-avatar" data-tooltip="Muhammed Midlaj K • iOS Engineer" data-icon="">
+                <img src="/images/MyPic.png" alt="Muhammed Midlaj K" class="hero-user-pic" />
+                <span class="hero-photo-glow-aura"></span>
+              </div>
+            </div>
+
+            <!-- Apple-style status badge -->
+            <div class="glass-badge hero-status-badge" data-tooltip="Actively open for iOS & Mobile engineering roles" data-icon="🟢">
+              <span class="pulsing-radar-dot"></span>
+              <span class="badge-text">Available for iOS & Full-Stack Roles</span>
+            </div>
+          </div>
+
+          <h1 id="hero-title" class="hero-headline">
+            Muhammed <br />
+            <span class="gradient-text">Midlaj K</span>
+          </h1>
+
+          <p class="hero-tagline">
+            <span class="tagline-pill highlight ios-title-pill">
+              <img src="/images/Apple.png" alt="Apple" class="inline-apple-logo" />
+              <span class="job-title-text">iOS Engineer</span>
+            </span>
+            <span class="tagline-arrow" aria-hidden="true">✦</span>
+            <span class="tagline-pill">Swift & SwiftUI</span>
+            <span class="tagline-arrow" aria-hidden="true">✦</span>
+            <span class="tagline-pill">Full-Stack Mobile & Web</span>
+          </p>
+
+          <p class="hero-pitch">
+            Crafting fluid, responsive native iOS applications and modern web experiences. Obsessed with Apple Human Interface Guidelines, 120Hz ProMotion physics, and robust, maintainable architecture.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="hero-cta-group">
+            <a href="#projects" class="glass-btn primary-glass-btn" data-tooltip="Explore iOS & Web Apps" data-icon="📱">
+              <span class="btn-shine"></span>
+              <span class="btn-text">View Projects</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+            </a>
+
+            <a href="#contact" class="glass-btn secondary-glass-btn" data-tooltip="Connect with Midlaj" data-icon="✉">
+              <span class="btn-text">Contact Me</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+
+            <button class="glass-btn ghost-glass-btn" id="hero-resume-trigger" aria-haspopup="dialog" data-tooltip="Preview & Print Official Resume" data-icon="📄">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+              <span class="btn-text">Resume</span>
+            </button>
+          </div>
+
+          <!-- Quick Metrics / Spec Strip (Apple Specs Style) -->
+          <div class="hero-specs-strip glass-card-panel">
+            <div class="spec-item" data-tooltip="Native Apple Ecosystem" data-icon="">
+              <span class="spec-label">Specialization</span>
+              <span class="spec-value">iOS & Swift</span>
+            </div>
+            <div class="spec-divider"></div>
+            <div class="spec-item" data-tooltip="Architectural Systems" data-icon="🏛️">
+              <span class="spec-label">Architecture</span>
+              <span class="spec-value">SwiftUI • TCA • Clean</span>
+            </div>
+            <div class="spec-divider"></div>
+            <div class="spec-item" data-tooltip="Graphics & Hardware Acceleration" data-icon="⚡">
+              <span class="spec-label">Hardware & GPU</span>
+              <span class="spec-value">Metal • 120Hz ProMotion</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Skills Section -->
+    <section id="skills" class="section-container" aria-labelledby="skills-title">
+      <div class="content-container">
+        
+        <!-- Section Header with Apple Music Eyebrow -->
+        <div class="section-header">
+          <div class="section-eyebrow">Technical Arsenal</div>
+          <h2 id="skills-title" class="section-title">Engineered with Precision</h2>
+          <p class="section-subtitle">
+            Specializing in Apple native technologies (Swift & SwiftUI), foundational systems programming, and modern full-stack mobile/web architecture.
+          </p>
+
+          <!-- Apple iOS Segmented Control / Filter Bar with 3D Liquid Glider -->
+          <div class="apple-segmented-control" role="tablist" aria-label="Skill Categories">
+            <span class="seg-glider" aria-hidden="true"></span>
+            <button class="seg-item active" role="tab" aria-selected="true" data-filter="all" data-tooltip="Show all technical skills" data-icon="✦">All Arsenal</button>
+            <button class="seg-item" role="tab" aria-selected="false" data-filter="ios" data-tooltip="Filter Swift & Apple Native skills" data-icon="">iOS & Swift</button>
+            <button class="seg-item" role="tab" aria-selected="false" data-filter="hardware" data-tooltip="Metal, ProMotion & CoreBluetooth" data-icon="⚡">Hardware & GPU</button>
+            <button class="seg-item" role="tab" aria-selected="false" data-filter="core" data-tooltip="Systems, Architecture & Databases" data-icon="⚙">Core & Systems</button>
+            <button class="seg-item" role="tab" aria-selected="false" data-filter="web-app" data-tooltip="Filter Web & Full-Stack skills" data-icon="🌐">Web & Full-Stack</button>
+          </div>
+        </div>
+
+        <!-- Skills Glass Cards Grid (Compact resting state, full details on hover / tap) -->
+        <div class="skills-grid" id="skills-grid">
+          
+          <!-- 1. Swift & SwiftUI -->
+          <div class="skill-card glass-card-panel" id="skill-1" data-category="ios" data-tooltip="Primary Specialization: Native iOS" data-icon="">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/Swift.png" alt="Swift Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">Swift & SwiftUI</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill active">iOS Specialization</span>
+              </div>
+              <p class="skill-desc">Declarative UI architecture, UIKit bridges, CoreLocation, AVFoundation pipelines, Combine reactive streams, and AppKit/macOS foundations.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 94%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 2. Metal & Hardware GPU Shaders (Hardware / Architecture Skill) -->
+          <div class="skill-card glass-card-panel" id="skill-2" data-category="ios hardware" data-tooltip="Hardware Acceleration & GPU Graphics" data-icon="⚡">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box metal-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">Metal & GPU Shaders</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill hardware">Hardware & GPU</span>
+              </div>
+              <p class="skill-desc">Metal Shading Language (MSL), compute pipelines, GPU vertex/fragment shaders, 120Hz ProMotion frame pacing, and liquid glass materials.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 88%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 3. SwiftData & CoreData Architecture (Architectural Skill) -->
+          <div class="skill-card glass-card-panel" id="skill-3" data-category="ios core" data-tooltip="Enterprise Persistence & CloudKit" data-icon="🏛️">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box swiftdata-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6c0 1.66 3.58 3 8 3s8-1.34 8-3-3.58-3-8-3-8 1.34-8 3zm0 6c0 1.66 3.58 3 8 3s8-1.34 8-3M4 18c0 1.66 3.58 3 8 3s8-1.34 8-3"></path><path d="M4 6v12c0 1.66 3.58 3 8 3s8-1.34 8-3V6"></path></svg>
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">SwiftData & CoreData</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill core">Architecture</span>
+              </div>
+              <p class="skill-desc">Enterprise persistence: multi-threaded background contexts, schema migrations, NSPersistentCloudKitContainer sync, and faulting optimization.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 91%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 4. CoreBluetooth & Hardware Telemetry (Hardware Skill) -->
+          <div class="skill-card glass-card-panel" id="skill-4" data-category="ios hardware" data-tooltip="BLE Sensor I/O & Embedded Telemetry" data-icon="📡">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box ble-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m7 7 10 10-5 5V2l5 5L7 17"></path></svg>
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">CoreBluetooth & BLE</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill hardware">Hardware / IoT</span>
+              </div>
+              <p class="skill-desc">CBCentral & CBPeripheral managers, GATT characteristic streaming, hardware sensor polling, packet serialization, and fault-tolerant reconnection.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 87%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 5. Xcode Instruments & Memory Profiling (Architectural Skill) -->
+          <div class="skill-card glass-card-panel" id="skill-5" data-category="ios core" data-tooltip="Memory Profiling & Concurrency" data-icon="🔬">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box instruments-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">Instruments & ARC</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill core">Architecture</span>
+              </div>
+              <p class="skill-desc">Xcode Instruments (Allocations, Leaks, Time Profiler), Retain Cycle isolation, memory graph audits, Swift Concurrency (Actors, Tasks), and 0-lag runtimes.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 90%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 6. React & Modern Web (with React.png) -->
+          <div class="skill-card glass-card-panel" id="skill-6" data-category="web-app" data-tooltip="Component-Driven Systems" data-icon="⚛">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/React.png" alt="React Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">React & Web Ecosystem</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill active">Modern Web</span>
+              </div>
+              <p class="skill-desc">Component-driven frontends with React, Vite tooling, state architecture, responsive hooks, RESTful API consumption, and cross-platform web apps.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 86%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 7. Python (with Python.png) -->
+          <div class="skill-card glass-card-panel" id="skill-7" data-category="core" data-tooltip="Automation & Backend Logic" data-icon="🐍">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/Python.png" alt="Python Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">Python</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill core">Core</span>
+              </div>
+              <p class="skill-desc">Scripting, automation tooling, data manipulation, rapid prototyping, and backend API integration with clean, maintainable architecture.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 85%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 8. C (with C.png) -->
+          <div class="skill-card glass-card-panel" id="skill-8" data-category="core" data-tooltip="Low-Level Memory & Pointers" data-icon="⚙">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/C.png" alt="C Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">C (Systems)</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill core">Systems</span>
+              </div>
+              <p class="skill-desc">Manual memory management, pointers, bitwise logic, and low-level system structures that build fundamental software engineering muscle.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 88%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 9. C++ -->
+          <div class="skill-card glass-card-panel" id="skill-9" data-category="core hardware" data-tooltip="High-Performance OOP & Data Structures" data-icon="⚙">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box cpp-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">C++</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill core">Systems / OOP</span>
+              </div>
+              <p class="skill-desc">Object-oriented paradigms, STL algorithms, templates, and high-performance computing principles essential for systems and graphics logic.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 82%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 10. JavaScript (with JavaScript.png) -->
+          <div class="skill-card glass-card-panel" id="skill-10" data-category="core web-app" data-tooltip="Asynchronous ES6+ Logic" data-icon="⚡">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/JavaScript.png" alt="JavaScript Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">JavaScript (ES6+)</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill modern">Web Foundation</span>
+              </div>
+              <p class="skill-desc">Modern asynchronous JavaScript, closures, DOM manipulation, Web APIs, event loops, and fluid animation controllers.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 90%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 11. HTML5 (with HTML5.png) -->
+          <div class="skill-card glass-card-panel" id="skill-11" data-category="core web-app" data-tooltip="Semantic Structure & Accessibility" data-icon="🌐">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/HTML5.png" alt="HTML5 Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">HTML5</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill modern">Semantic</span>
+              </div>
+              <p class="skill-desc">Semantic document trees, accessibility standards (WCAG/ARIA), Canvas API, viewport scaling, and SEO-optimized structures.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 94%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 12. CSS3 (with CSS3.png) -->
+          <div class="skill-card glass-card-panel" id="skill-12" data-category="core web-app" data-tooltip="Liquid Glass & 120Hz Animation" data-icon="🎨">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/CSS3.png" alt="CSS3 Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">CSS3 & Glass</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill modern">Styling</span>
+              </div>
+              <p class="skill-desc">Apple Liquid Glass styling, backdrop-filter physics, hardware-accelerated transforms, responsive media queries, and design systems.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 92%;"></div></div>
+            </div>
+          </div>
+
+          <!-- 13. MySQL (with MySQL.png) -->
+          <div class="skill-card glass-card-panel" id="skill-13" data-category="core" data-tooltip="Relational Database Architecture" data-icon="🗄">
+            <div class="glass-specular-highlight"></div>
+            <div class="skill-header-compact">
+              <div class="skill-icon-box custom-logo-box">
+                <img src="/images/MySQL.png" alt="MySQL Logo" class="skill-png-logo" />
+              </div>
+              <div class="skill-title-block">
+                <h3 class="skill-name">MySQL</h3>
+                <span class="skill-mobile-hint" aria-hidden="true">Details ▾</span>
+              </div>
+            </div>
+            <div class="skill-details-collapsible">
+              <div class="skill-pill-row">
+                <span class="skill-pill core">Database</span>
+              </div>
+              <p class="skill-desc">Relational database design, query optimization, normalization, indexing, transaction integrity, and schema modeling.</p>
+              <div class="skill-meter"><div class="meter-bar" style="--level: 84%;"></div></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- NEW SECTION: Modern Tooling & AI-Augmented Engineering (Immediately after Skills) -->
+    <section id="modern-tools" class="section-container tools-section" aria-labelledby="tools-title">
+      <div class="content-container">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">AI-Augmented Engineering</div>
+          <h2 id="tools-title" class="section-title">Next-Gen Development Workflow</h2>
+          <p class="section-subtitle">
+            Harnessing cutting-edge agentic workflows and AI-native developer tooling to architect, test, and ship high-velocity iOS and full-stack software with unprecedented precision.
+          </p>
+        </div>
+
+        <div class="tools-grid">
+          
+          <!-- 1. Google Antigravity -->
+          <div class="tool-card glass-card-panel" data-tooltip="Autonomous Agentic Pair Programming" data-icon="🌌">
+            <div class="glass-specular-highlight"></div>
+            <div class="tool-card-header">
+              <div class="tool-logo-box">
+                <img src="/images/Antigravity.png" alt="Google Antigravity Logo" class="tool-png-logo" />
+              </div>
+              <div class="tool-title-block">
+                <span class="tool-eyebrow">Autonomous Coding Agent</span>
+                <h3 class="tool-name">Google Antigravity</h3>
+              </div>
+            </div>
+
+            <p class="tool-desc">
+              Leveraging advanced agentic coding systems for autonomous pair programming, deep multi-file architectural planning, automated browser testing, and zero-compromise code quality validation.
+            </p>
+
+            <div class="tool-tags">
+              <span class="tech-tag">Agentic Coding</span>
+              <span class="tech-tag">Browser Subagents</span>
+              <span class="tech-tag">Architectural Planning</span>
+            </div>
+          </div>
+
+          <!-- 2. Claude Code -->
+          <div class="tool-card glass-card-panel" data-tooltip="Terminal Code Intelligence & Logic" data-icon="🧠">
+            <div class="glass-specular-highlight"></div>
+            <div class="tool-card-header">
+              <div class="tool-logo-box">
+                <img src="/images/Claude.png" alt="Claude Code Logo" class="tool-png-logo" />
+              </div>
+              <div class="tool-title-block">
+                <span class="tool-eyebrow">Terminal Intelligence</span>
+                <h3 class="tool-name">Claude Code</h3>
+              </div>
+            </div>
+
+            <p class="tool-desc">
+              Command-line agent orchestration for rapid semantic debugging, deep architectural refactoring, complex mathematical algorithm modeling, and systematic codebase audits.
+            </p>
+
+            <div class="tool-tags">
+              <span class="tech-tag">CLI Agent</span>
+              <span class="tech-tag">Deep Semantic Logic</span>
+              <span class="tech-tag">Code Audits</span>
+            </div>
+          </div>
+
+          <!-- 3. Cursor -->
+          <div class="tool-card glass-card-panel" data-tooltip="AI-Native IDE & Code Synthesis" data-icon="⚡">
+            <div class="glass-specular-highlight"></div>
+            <div class="tool-card-header">
+              <div class="tool-logo-box">
+                <img src="/images/cursor.png" alt="Cursor Logo" class="tool-png-logo" />
+              </div>
+              <div class="tool-title-block">
+                <span class="tool-eyebrow">AI-Native IDE</span>
+                <h3 class="tool-name">Cursor</h3>
+              </div>
+            </div>
+
+            <p class="tool-desc">
+              Harnessing full-codebase semantic indexing, multi-cursor editing, real-time code completion, and prompt-driven UI generation to accelerate development cycles by 5x.
+            </p>
+
+            <div class="tool-tags">
+              <span class="tech-tag">Semantic Indexing</span>
+              <span class="tech-tag">Fast Prototyping</span>
+              <span class="tech-tag">Multi-File Edits</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. Projects Section -->
+    <section id="projects" class="section-container" aria-labelledby="projects-title">
+      <div class="content-container">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">Featured Portfolio</div>
+          <h2 id="projects-title" class="section-title">Selected Projects</h2>
+          <p class="section-subtitle">
+            From native iOS apps calculating astronomical golden-hour ephemeris to enterprise mobile client platforms and luxury web applications.
+          </p>
+
+          <!-- iOS Switch Style Filter Strip -->
+          <div class="project-filter-toolbar glass-card-panel">
+            <span class="filter-toolbar-label">Category Filter:</span>
+            <div class="filter-chips-group" id="project-filter-group">
+              <button class="filter-chip active" data-filter="all" data-tooltip="All 4 Projects" data-icon="✦">All Projects (4)</button>
+              <button class="filter-chip" data-filter="ios" data-tooltip="Native Swift & iOS Applications" data-icon="📱">iOS & Swift</button>
+              <button class="filter-chip" data-filter="mobile" data-tooltip="Mobile Client Platforms" data-icon="📲">Mobile Apps</button>
+              <button class="filter-chip" data-filter="web" data-tooltip="Web Experiences & Parallax" data-icon="🌐">Web Experience</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="projects-grid">
+
+          <!-- 1. SolX (with SolX.png iOS App Icon) -->
+          <article class="project-card glass-card-panel" data-category="ios" id="project-solx">
+            <div class="glass-specular-highlight"></div>
+            
+            <div class="project-media-container">
+              <img src="/images/solx.jpg" alt="SolX iOS golden-hour photography app preview" class="project-img" loading="lazy" />
+              <div class="project-overlay-badge">
+                <span class="apple-pill-tag">iOS App • Swift</span>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <!-- App Store Style Header with Authentic iOS App Icon -->
+              <div class="project-app-header">
+                <img src="/images/SolX.png" alt="SolX App Icon" class="ios-app-icon" />
+                <div class="project-title-group">
+                  <h3 class="project-title">SolX</h3>
+                  <span class="project-subtitle-text">Golden-Hour Photography Companion</span>
+                </div>
+              </div>
+
+              <div class="project-tags">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">SwiftUI</span>
+                <span class="tech-tag">CoreLocation</span>
+                <span class="tech-tag">AVFoundation</span>
+              </div>
+
+              <p class="project-desc">
+                High-precision iOS golden-hour photography tool. Calculates exact solar ephemeris angles, blue hour countdowns, sun azimuth compass trajectories, and manual shutter settings with tactile haptic feedback.
+              </p>
+
+              <div class="project-card-footer">
+                <button class="glass-pill-btn project-detail-btn" data-modal="modal-solx" data-tooltip="Inspect SolX Architecture & Code" data-icon="📱">
+                  <span>Explore Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+                <span class="project-status-note">Active Build</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2. MMD Powerboat Marines marketing app (with MMD.png iOS App Icon) -->
+          <article class="project-card glass-card-panel" data-category="ios mobile" id="project-powerboat-marketing">
+            <div class="glass-specular-highlight"></div>
+
+            <div class="project-media-container">
+              <img src="/images/powerboat-marketing.jpg" alt="MMD Powerboat Marines marketing app interface preview" class="project-img" loading="lazy" />
+              <div class="project-overlay-badge">
+                <span class="apple-pill-tag">iOS Showcase Suite</span>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <!-- App Store Style Header with Authentic iOS App Icon -->
+              <div class="project-app-header">
+                <img src="/images/MMD.png" alt="MMD App Icon" class="ios-app-icon" />
+                <div class="project-title-group">
+                  <h3 class="project-title">MMD Marketing App</h3>
+                  <span class="project-subtitle-text">Luxury Marine Vessel Showcase</span>
+                </div>
+              </div>
+
+              <div class="project-tags">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">WebKit Bridge</span>
+                <span class="tech-tag">RESTful API</span>
+                <span class="tech-tag">powerboatmarines.com</span>
+              </div>
+
+              <p class="project-desc">
+                Native iOS client showcase application for powerboatmarines.com. Interactive luxury vessel fleet visualizer, technical engine specifications, high-knot performance data, and direct sea-trial booking portal.
+              </p>
+
+              <div class="project-card-footer">
+                <button class="glass-pill-btn project-detail-btn" data-modal="modal-powerboat-marketing" data-tooltip="Inspect Client iOS Showcase App" data-icon="📱">
+                  <span>Explore Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+                <a href="https://powerboatmarines.com" target="_blank" rel="noopener noreferrer" class="project-link-icon" data-tooltip="↗ Open powerboatmarines.com" data-icon="↗">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3. Powerboat Marines mobile app (with MMD.png iOS App Icon) -->
+          <article class="project-card glass-card-panel" data-category="mobile web" id="project-powerboat-app">
+            <div class="glass-specular-highlight"></div>
+
+            <div class="project-media-container">
+              <img src="/images/powerboat-app.jpg" alt="Powerboat Marines mobile cross-platform app preview" class="project-img" loading="lazy" />
+              <div class="project-overlay-badge">
+                <span class="apple-pill-tag">iOS / Android Mobile App</span>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <!-- App Store Style Header with Authentic iOS App Icon -->
+              <div class="project-app-header">
+                <img src="/images/MMD.png" alt="Powerboat Marines App Icon" class="ios-app-icon" />
+                <div class="project-title-group">
+                  <h3 class="project-title">Powerboat Marines Mobile</h3>
+                  <span class="project-subtitle-text">Cross-Platform Fleet & Telemetry</span>
+                </div>
+              </div>
+
+              <div class="project-tags">
+                <span class="tech-tag">Mobile Web App</span>
+                <span class="tech-tag">Offline Telemetry</span>
+                <span class="tech-tag">REST APIs</span>
+                <span class="tech-tag">UI/UX</span>
+              </div>
+
+              <p class="project-desc">
+                Full iOS and Android mobile conversion of powerboatmarines.com. Engineered with responsive liquid navigation, offline vessel spec caching, push notifications for service alerts, and live GPS telemetry feeds.
+              </p>
+
+              <div class="project-card-footer">
+                <button class="glass-pill-btn project-detail-btn" data-modal="modal-powerboat-app" data-tooltip="Inspect Mobile Conversion Architecture" data-icon="📲">
+                  <span>Explore Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+                <a href="https://powerboatmarines.com" target="_blank" rel="noopener noreferrer" class="project-link-icon" data-tooltip="↗ Open powerboatmarines.com" data-icon="↗">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4. BREWME (with brewme.png iOS App Icon) -->
+          <article class="project-card glass-card-panel" data-category="web" id="project-brewme">
+            <div class="glass-specular-highlight"></div>
+
+            <div class="project-media-container">
+              <img src="/images/brewme.jpg" alt="BREWME Cafe Madayipara Eco Park live application preview" class="project-img" loading="lazy" />
+              <div class="project-overlay-badge">
+                <span class="apple-pill-tag">Production Web Application</span>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <!-- App Store Style Header with Authentic iOS App Icon -->
+              <div class="project-app-header">
+                <img src="/images/brewme.png" alt="BREWME App Icon" class="ios-app-icon" />
+                <div class="project-title-group">
+                  <h3 class="project-title">BREWME</h3>
+                  <span class="project-subtitle-text">The Complete Coffee Shop Solution</span>
+                </div>
+              </div>
+
+              <div class="project-tags">
+                <span class="tech-tag">React 18</span>
+                <span class="tech-tag">Tailwind CSS</span>
+                <span class="tech-tag">Framer Motion</span>
+                <span class="tech-tag">QR Menu System</span>
+              </div>
+
+              <p class="project-desc">
+                Commercial web platform for BREWME Cafe at Madayipara Eco Park, Kannur. Features dynamic QR table menu with category filters, interactive signature feast platter builder with real-time price multipliers, sensory flavor radar, and mobile-first ordering.
+              </p>
+
+              <div class="project-card-footer">
+                <button class="glass-pill-btn project-detail-btn" data-modal="modal-brewme" data-tooltip="Inspect Full Technical Case Study" data-icon="☕">
+                  <span>Explore Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+                <a href="https://brewme-the-complete-coffee-shop-sol.vercel.app" target="_blank" rel="noopener noreferrer" class="project-link-icon" data-tooltip="↗ Open BREWME Live App" data-icon="↗">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- 5. Aether Audio Engine (is-extra-hidden by default) -->
+          <article class="project-card glass-card-panel is-extra-hidden" data-category="ios mobile" id="project-aether-audio">
+            <div class="glass-specular-highlight"></div>
+
+            <div class="project-media-container">
+              <img src="/images/ios-engineer-hero.jpg" alt="Aether Spatial Audio Engine" class="project-img" loading="lazy" />
+              <div class="project-overlay-badge">
+                <span class="apple-pill-tag">iOS Audio Architecture</span>
+              </div>
+            </div>
+
+            <div class="project-content">
+              <div class="project-app-header">
+                <img src="/images/Apple.png" alt="Aether App Icon" class="ios-app-icon" />
+                <div class="project-title-group">
+                  <h3 class="project-title">Aether Audio</h3>
+                  <span class="project-subtitle-text">Low-Latency Spatial Audio Engine</span>
+                </div>
+              </div>
+
+              <div class="project-tags">
+                <span class="tech-tag">Swift</span>
+                <span class="tech-tag">AVAudioEngine</span>
+                <span class="tech-tag">AudioUnit</span>
+                <span class="tech-tag">C++ DSP</span>
+              </div>
+
+              <p class="project-desc">
+                Professional 32-bit floating point audio synthesis and DSP architecture built with AVAudioEngine and custom C++ kernels. Features real-time FFT spectrum visualizer and 120Hz Liquid Glass waveform physics.
+              </p>
+
+              <div class="project-card-footer">
+                <button class="glass-pill-btn project-detail-btn" data-modal="modal-project-aether" data-tooltip="Inspect Spatial Audio Architecture" data-icon="🎧">
+                  <span>Explore Case Study</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </button>
+                <span class="project-status-note">Native Swift & C++</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- View All Projects Expand Switch -->
+        <div class="expand-toggle-wrapper" id="projects-expand-wrapper">
+          <button class="expand-toggle-btn" id="toggle-all-projects-btn" aria-expanded="false" data-tooltip="Show all engineering projects" data-icon="↓">
+            <span class="expand-btn-text">View All Projects (5)</span>
+            <svg class="expand-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. Experience / Resume Section -->
+    <section id="experience" class="section-container" aria-labelledby="experience-title">
+      <div class="content-container">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">Professional History</div>
+          <h2 id="experience-title" class="section-title">Career & Experience</h2>
+          <p class="section-subtitle">
+            Focused on native iOS app development, enterprise mobile platforms, and formal computer application foundations.
+          </p>
+
+          <div class="resume-header-actions">
+            <button class="glass-btn primary-glass-btn" id="resume-download-btn" aria-haspopup="dialog" data-tooltip="Open & Print Full Official Resume" data-icon="📄">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download / Preview Resume</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Experience Timeline -->
+        <div class="experience-timeline">
+          
+          <!-- Item 1: System & iOS Engineer -->
+          <div class="timeline-card glass-card-panel" data-tooltip="Current Professional Engineering Role" data-icon="💼">
+            <div class="glass-specular-highlight"></div>
+            <div class="timeline-dot-wrapper">
+              <span class="timeline-pulse-dot"></span>
+              <span class="timeline-line"></span>
+            </div>
+
+            <div class="timeline-content">
+              <div class="timeline-meta-row">
+                <span class="timeline-date-badge">Current Role</span>
+                <span class="timeline-location">Kochi / Global Operations</span>
+              </div>
+
+              <h3 class="role-title">iOS & Systems Engineer</h3>
+              <div class="company-name">MMD Powerboat Marines Pvt Ltd</div>
+
+              <p class="role-desc">
+                Leading mobile application architecture and digital systems. Responsible for native iOS client showcase applications, cross-platform mobile conversions of enterprise web portals, and live telemetry synchronization.
+              </p>
+
+              <div class="role-highlights">
+                <div class="highlight-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Spearheaded mobile app ecosystem conversion for powerboatmarines.com</span>
+                </div>
+                <div class="highlight-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Engineered responsive vessel telemetry pipelines and dynamic technical specs visualization</span>
+                </div>
+                <div class="highlight-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Maintained 99.9% uptime on customer digital touchpoints and lead delivery pipelines</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 2: BCA Degree -->
+          <div class="timeline-card glass-card-panel" data-tooltip="Computer Science & Theory" data-icon="🎓">
+            <div class="glass-specular-highlight"></div>
+            <div class="timeline-dot-wrapper">
+              <span class="timeline-pulse-dot academic-dot"></span>
+              <span class="timeline-line"></span>
+            </div>
+
+            <div class="timeline-content">
+              <div class="timeline-meta-row">
+                <span class="timeline-date-badge academic">Academic Degree</span>
+                <span class="timeline-location">University Degree</span>
+              </div>
+
+              <h3 class="role-title">Bachelor of Computer Applications (BCA)</h3>
+              <div class="company-name">Foundational Computer Science & Software Engineering</div>
+
+              <p class="role-desc">
+                Comprehensive academic training in core computer science disciplines: object-oriented programming, data structures, algorithm efficiency, relational database design (SQL/MySQL), software architecture models, and computer networking.
+              </p>
+
+              <div class="role-highlights">
+                <div class="highlight-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Core coursework: Data Structures & Algorithms in C/C++, MySQL Relational Systems</span>
+                </div>
+                <div class="highlight-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Applied software engineering principles and object-oriented architectural patterns</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Native iOS Exploration & Engineering -->
+          <div class="timeline-card glass-card-panel" data-tooltip="Native Apple R&D" data-icon="">
+            <div class="glass-specular-highlight"></div>
+            <div class="timeline-dot-wrapper">
+              <span class="timeline-pulse-dot marine-dot"></span>
+            </div>
+
+            <div class="timeline-content">
+              <div class="timeline-meta-row">
+                <span class="timeline-date-badge marine">Native Engineering</span>
+                <span class="timeline-location">Apple iOS Ecosystem</span>
+              </div>
+
+              <h3 class="role-title">Independent iOS Engineering & R&D</h3>
+              <div class="company-name">SwiftUI, CoreLocation & High-Performance Graphics</div>
+
+              <p class="role-desc">
+                Independent architecture of high-precision native iOS applications like SolX. Deep research into astronomical mathematical algorithms, AVFoundation manual camera controls, custom gesture engines, and Apple Liquid Glass design systems.
+              </p>
+
+              <div class="role-highlights">
+                <div class="highlight-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Offline solar ephemeris computation with zero external network latency</span>
+                </div>
+                <div class="highlight-chip">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Strict adherence to Apple HIG, fluid gesture physics, and accessibility</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. Technical Blogs & Case Studies Section -->
+    <section id="blogs" class="section-container" aria-labelledby="blogs-title">
+      <div class="content-container">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">Writing & Insights</div>
+          <h2 id="blogs-title" class="section-title">Technical Blogs & Case Studies</h2>
+          <p class="section-subtitle">
+            Deep dives into native iOS architectures, Apple HIG liquid glass design systems, high-precision astronomical algorithms, and agentic AI workflows.
+          </p>
+
+          <!-- Category filter toolbar -->
+          <!-- Tags / Hashtags filter toolbar -->
+          <div class="project-filter-toolbar glass-card-panel blog-filter-toolbar">
+            <span class="filter-toolbar-label">Tags:</span>
+            <div class="filter-chips-group" id="blog-filter-group">
+              <button class="filter-chip active" data-blog-tag="all" data-tooltip="All published articles" data-icon="✦">All Articles</button>
+              <button class="filter-chip" data-blog-tag="#SwiftUI" data-tooltip="Filter by #SwiftUI" data-icon="">#SwiftUI</button>
+              <button class="filter-chip" data-blog-tag="#LiquidGlass" data-tooltip="Filter by #LiquidGlass" data-icon="✨">#LiquidGlass</button>
+              <button class="filter-chip" data-blog-tag="#Algorithms" data-tooltip="Filter by #Algorithms" data-icon="⚡">#Algorithms</button>
+              <button class="filter-chip" data-blog-tag="#AI" data-tooltip="Filter by #AI" data-icon="🤖">#AI</button>
+              <button class="filter-chip" data-blog-tag="#CoreBluetooth" data-tooltip="Filter by #CoreBluetooth" data-icon="📶">#CoreBluetooth</button>
+              <button class="filter-chip" data-blog-tag="#SwiftData" data-tooltip="Filter by #SwiftData" data-icon="💾">#SwiftData</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blogs Grid -->
+        <div class="blogs-grid">
+
+          <!-- Blog Card 1: Liquid Glass UI in SwiftUI -->
+          <article class="blog-card glass-card-panel" data-blog-tags="#SwiftUI #iOS #LiquidGlass #Metal #AppleHIG" id="blog-1" data-blog-id="blog-card-liquid-glass">
+            <div class="glass-specular-highlight"></div>
+            
+            <div class="blog-media-container">
+              <img src="/images/ios-engineer-hero.jpg" alt="SwiftUI Liquid Glass Architecture" class="blog-img" loading="lazy" />
+              <div class="blog-overlay-badge">
+                <span class="apple-pill-tag">#SwiftUI</span>
+              </div>
+            </div>
+
+            <div class="blog-content">
+              <div class="blog-meta-row">
+                <span class="blog-date-badge">September 2026</span>
+                <span class="blog-read-time">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>6 min read</span>
+                </span>
+              </div>
+
+              <h3 class="blog-title">Architecting Liquid Glass UI in SwiftUI: Apple Music & Control Center</h3>
+
+              <div class="blog-tags">
+                <span class="tech-tag">#SwiftUI</span>
+                <span class="tech-tag">#iOS</span>
+                <span class="tech-tag">#LiquidGlass</span>
+                <span class="tech-tag">#Metal</span>
+                <span class="tech-tag">#AppleHIG</span>
+              </div>
+
+              <p class="blog-excerpt">
+                A technical exploration of building multi-layered translucent glass sheets, dynamic ambient color meshes, and specular highlights that sustain 120fps ProMotion fluidity across modern iOS devices.
+              </p>
+
+              <div class="blog-card-footer">
+                <button class="glass-pill-btn blog-read-btn" data-modal="modal-blog-liquid-glass" data-tooltip="Read Full Article" data-icon="📖">
+                  <span>Read Article</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <span class="blog-author-sig">By Muhammed Midlaj</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Blog Card 2: Precision Solar Ephemeris in SolX -->
+          <article class="blog-card glass-card-panel" data-blog-tags="#Swift #Algorithms #CoreLocation #SolarEphemeris #SIMD" id="blog-2" data-blog-id="blog-card-ephemeris">
+            <div class="glass-specular-highlight"></div>
+            
+            <div class="blog-media-container">
+              <img src="/images/solx.jpg" alt="SolX Solar Ephemeris Calculations" class="blog-img" loading="lazy" />
+              <div class="blog-overlay-badge">
+                <span class="apple-pill-tag">#Algorithms</span>
+              </div>
+            </div>
+
+            <div class="blog-content">
+              <div class="blog-meta-row">
+                <span class="blog-date-badge">August 2026</span>
+                <span class="blog-read-time">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>8 min read</span>
+                </span>
+              </div>
+
+              <h3 class="blog-title">Precision Solar Ephemeris in Swift: The Math Powering SolX</h3>
+
+              <div class="blog-tags">
+                <span class="tech-tag">#Swift</span>
+                <span class="tech-tag">#Algorithms</span>
+                <span class="tech-tag">#CoreLocation</span>
+                <span class="tech-tag">#SolarEphemeris</span>
+                <span class="tech-tag">#SIMD</span>
+              </div>
+
+              <p class="blog-excerpt">
+                How to calculate exact solar azimuth angles, astronomical twilight, blue hour transitions, and golden-hour countdowns directly on device with micro-arcsecond accuracy and zero network reliance.
+              </p>
+
+              <div class="blog-card-footer">
+                <button class="glass-pill-btn blog-read-btn" data-modal="modal-blog-ephemeris" data-tooltip="Read Full Article" data-icon="📖">
+                  <span>Read Article</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <span class="blog-author-sig">By Muhammed Midlaj</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Blog Card 3: Autonomous AI Workflows -->
+          <article class="blog-card glass-card-panel" data-blog-tags="#AI #AgenticCoding #Antigravity #ClaudeCode #MCP" id="blog-3" data-blog-id="blog-card-agentic-ai">
+            <div class="glass-specular-highlight"></div>
+            
+            <div class="blog-media-container" style="background: radial-gradient(circle at center, rgba(16,24,40,0.9), rgba(5,8,16,0.95)); display: flex; align-items: center; justify-content: center;">
+              <img src="/images/Antigravity.png" alt="AI-Accelerated iOS Engineering Workflow" class="blog-img" loading="lazy" style="object-fit: contain; width: 68%; height: 68%;" />
+              <div class="blog-overlay-badge">
+                <span class="apple-pill-tag">#AI</span>
+              </div>
+            </div>
+
+            <div class="blog-content">
+              <div class="blog-meta-row">
+                <span class="blog-date-badge">July 2026</span>
+                <span class="blog-read-time">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>5 min read</span>
+                </span>
+              </div>
+
+              <h3 class="blog-title">The Agentic iOS Engineer: Antigravity, Claude Code & MCP</h3>
+
+              <div class="blog-tags">
+                <span class="tech-tag">#AI</span>
+                <span class="tech-tag">#AgenticCoding</span>
+                <span class="tech-tag">#Antigravity</span>
+                <span class="tech-tag">#ClaudeCode</span>
+                <span class="tech-tag">#MCP</span>
+              </div>
+
+              <p class="blog-excerpt">
+                Moving beyond simple autocomplete: how autonomous multi-agent engineering workflows, custom skills, and MCP servers compress multi-day iOS refactors into minutes without sacrificing code quality.
+              </p>
+
+              <div class="blog-card-footer">
+                <button class="glass-pill-btn blog-read-btn" data-modal="modal-blog-agentic-ai" data-tooltip="Read Full Article" data-icon="📖">
+                  <span>Read Article</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <span class="blog-author-sig">By Muhammed Midlaj</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Blog Card 4: CoreBluetooth & BLE Telemetry (is-extra-hidden by default) -->
+          <article class="blog-card glass-card-panel is-extra-hidden" data-blog-tags="#CoreBluetooth #BLE #Hardware #IoT #Swift" id="blog-4" data-blog-id="blog-card-ble">
+            <div class="glass-specular-highlight"></div>
+            
+            <div class="blog-media-container">
+              <img src="/images/powerboat-app.jpg" alt="CoreBluetooth & BLE Telemetry" class="blog-img" loading="lazy" />
+              <div class="blog-overlay-badge">
+                <span class="apple-pill-tag">#CoreBluetooth</span>
+              </div>
+            </div>
+
+            <div class="blog-content">
+              <div class="blog-meta-row">
+                <span class="blog-date-badge">June 2026</span>
+                <span class="blog-read-time">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>7 min read</span>
+                </span>
+              </div>
+
+              <h3 class="blog-title">CoreBluetooth & BLE Telemetry: Real-Time Hardware Sensor Streaming</h3>
+
+              <div class="blog-tags">
+                <span class="tech-tag">#CoreBluetooth</span>
+                <span class="tech-tag">#BLE</span>
+                <span class="tech-tag">#Hardware</span>
+                <span class="tech-tag">#IoT</span>
+                <span class="tech-tag">#Swift</span>
+              </div>
+
+              <p class="blog-excerpt">
+                Architecting robust CBCentral and CBPeripheral state machines in Swift to stream telemetry packets over Bluetooth Low Energy with zero packet drop and automated background reconnection.
+              </p>
+
+              <div class="blog-card-footer">
+                <button class="glass-pill-btn blog-read-btn" data-modal="modal-blog-ble" data-tooltip="Read Full Article" data-icon="📖">
+                  <span>Read Article</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <span class="blog-author-sig">By Muhammed Midlaj</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Blog Card 5: High-Performance SwiftData (is-extra-hidden by default) -->
+          <article class="blog-card glass-card-panel is-extra-hidden" data-blog-tags="#SwiftData #CoreData #Concurrency #Architecture #iOS" id="blog-5" data-blog-id="blog-card-swiftdata">
+            <div class="glass-specular-highlight"></div>
+            
+            <div class="blog-media-container">
+              <img src="/images/solx.jpg" alt="SwiftData Concurrency & Persistence" class="blog-img" loading="lazy" />
+              <div class="blog-overlay-badge">
+                <span class="apple-pill-tag">#SwiftData</span>
+              </div>
+            </div>
+
+            <div class="blog-content">
+              <div class="blog-meta-row">
+                <span class="blog-date-badge">May 2026</span>
+                <span class="blog-read-time">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  <span>6 min read</span>
+                </span>
+              </div>
+
+              <h3 class="blog-title">High-Performance SwiftData: Multi-Threaded Sync & Faulting Optimization</h3>
+
+              <div class="blog-tags">
+                <span class="tech-tag">#SwiftData</span>
+                <span class="tech-tag">#CoreData</span>
+                <span class="tech-tag">#Concurrency</span>
+                <span class="tech-tag">#Architecture</span>
+                <span class="tech-tag">#iOS</span>
+              </div>
+
+              <p class="blog-excerpt">
+                Mastering SwiftData concurrency with ModelActor, optimizing memory graphs with faulting boundaries, and orchestrating seamless background CloudKit synchronizations.
+              </p>
+
+              <div class="blog-card-footer">
+                <button class="glass-pill-btn blog-read-btn" data-modal="modal-blog-swiftdata" data-tooltip="Read Full Article" data-icon="📖">
+                  <span>Read Article</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </button>
+                <span class="blog-author-sig">By Muhammed Midlaj</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- View More Blogs Expand Switch -->
+        <div class="expand-toggle-wrapper" id="blogs-expand-wrapper">
+          <button class="expand-toggle-btn" id="toggle-all-blogs-btn" aria-expanded="false" data-tooltip="Show all technical articles" data-icon="↓">
+            <span class="expand-btn-text">View More Blogs (5)</span>
+            <svg class="expand-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 6. Contact Section -->
+    <section id="contact" class="section-container" aria-labelledby="contact-title">
+      <div class="content-container">
+        
+        <div class="section-header">
+          <div class="section-eyebrow">Connect</div>
+          <h2 id="contact-title" class="section-title">Let’s Build Something Exceptional</h2>
+          <p class="section-subtitle">
+            Looking for an iOS engineer or full-stack mobile developer? Let’s connect and talk about your project or team.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          
+          <!-- Left: Direct Contact Channels (Glass Cards with One-Click Copy & Mini-Popups) -->
+          <div class="contact-channels-col">
+            
+            <!-- Email Glass Card -->
+            <div class="contact-channel-card glass-card-panel" id="copy-email-btn" role="button" tabindex="0" data-tooltip="Click to copy email: disney.mio@icloud.com" data-icon="✉">
+              <div class="glass-specular-highlight"></div>
+              <div class="channel-icon-box email">
+                <img src="/social/Mail.png" alt="Mail App Icon" class="ios-contact-icon" />
+              </div>
+              <div class="channel-details">
+                <span class="channel-label">Email Address</span>
+                <span class="channel-value" id="email-text">disney.mio@icloud.com</span>
+              </div>
+              <div class="channel-action">
+                <span class="copy-badge">Copy</span>
+                <a href="mailto:disney.mio@icloud.com" class="direct-link-icon" data-tooltip="Open in Mail app" data-icon="↗" onclick="event.stopPropagation()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Phone Glass Card -->
+            <div class="contact-channel-card glass-card-panel" id="copy-phone-btn" role="button" tabindex="0" data-tooltip="Click to copy phone: +91 80866 69437" data-icon="📞">
+              <div class="glass-specular-highlight"></div>
+              <div class="channel-icon-box phone">
+                <img src="/social/phone.png" alt="Phone App Icon" class="ios-contact-icon" />
+              </div>
+              <div class="channel-details">
+                <span class="channel-label">Direct Voice Call</span>
+                <span class="channel-value" id="phone-text">+91 80866 69437</span>
+              </div>
+              <div class="channel-action">
+                <span class="copy-badge">Copy</span>
+                <a href="tel:+918086669437" class="direct-link-icon" data-tooltip="Call directly" data-icon="📞" onclick="event.stopPropagation()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- WhatsApp Direct Message Glass Card -->
+            <div class="contact-channel-card glass-card-panel" id="copy-whatsapp-btn" role="button" tabindex="0" data-tooltip="Click to copy WhatsApp: +91 80866 69437" data-icon="💬">
+              <div class="glass-specular-highlight"></div>
+              <div class="channel-icon-box whatsapp">
+                <img src="/social/Whatsapp.png" alt="WhatsApp App Icon" class="ios-contact-icon" />
+              </div>
+              <div class="channel-details">
+                <span class="channel-label">WhatsApp Direct Message</span>
+                <span class="channel-value" id="whatsapp-text">+91 80866 69437</span>
+              </div>
+              <div class="channel-action">
+                <span class="copy-badge">Copy</span>
+                <a href="https://wa.me/918086669437" target="_blank" rel="noopener noreferrer" class="direct-link-icon" data-tooltip="Chat on WhatsApp" data-icon="💬" onclick="event.stopPropagation()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Social Links Grid (GitHub & LinkedIn with iOS App Icons) -->
+            <div class="social-channels-row">
+              
+              <!-- GitHub Glass Card -->
+              <a href="https://github.com/midlaj-tech" target="_blank" rel="noopener noreferrer" class="social-card glass-card-panel" data-tooltip="↗ Open github.com/midlaj-tech" data-icon="⌨">
+                <div class="glass-specular-highlight"></div>
+                <div class="social-icon-box github">
+                  <img src="/social/github.png" alt="GitHub Logo" class="ios-contact-icon" />
+                </div>
+                <div class="social-details">
+                  <span class="social-title">GitHub</span>
+                  <span class="social-handle">github.com/midlaj-tech</span>
+                </div>
+                <div class="social-arrow">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </div>
+              </a>
+
+              <!-- LinkedIn Glass Card -->
+              <a href="https://linkedin.com/in/muhammed-midlaj-927458238" target="_blank" rel="noopener noreferrer" class="social-card glass-card-panel" data-tooltip="↗ Connect on LinkedIn" data-icon="💼">
+                <div class="glass-specular-highlight"></div>
+                <div class="social-icon-box linkedin">
+                  <img src="/social/linkedin.png" alt="LinkedIn Logo" class="ios-contact-icon" />
+                </div>
+                <div class="social-details">
+                  <span class="social-title">LinkedIn</span>
+                  <span class="social-handle">muhammed-midlaj</span>
+                </div>
+                <div class="social-arrow">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </div>
+              </a>
+
+            </div>
+
+          </div>
+
+          <!-- Right: Interactive Glass Contact Form -->
+          <div class="contact-form-col">
+            <div class="glass-card-panel form-panel">
+              <div class="glass-specular-highlight"></div>
+              
+              <div class="form-header">
+                <h3>Direct Message</h3>
+                <p>Send an immediate message directly to Midlaj's inbox.</p>
+              </div>
+
+              <form id="contact-form" class="liquid-form" novalidate>
+                <!-- Anti-Spam Honeypot Field (visually hidden, trap for bots) -->
+                <div class="form-hp" style="position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true">
+                  <label for="contact-hp">Leave this field blank</label>
+                  <input type="text" id="contact-hp" name="_honey_bot" tabindex="-1" autocomplete="off" />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="contact-name">Your Name</label>
+                    <input type="text" id="contact-name" name="name" required maxlength="100" placeholder="e.g. Alex Henderson" class="glass-input" />
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-email">Email Address</label>
+                    <input type="email" id="contact-email" name="email" required maxlength="100" placeholder="alex@company.com" class="glass-input" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-subject">Topic / Opportunity</label>
+                  <input type="text" id="contact-subject" name="subject" maxlength="150" placeholder="iOS Development / Full-Stack Project / Collaboration" class="glass-input" />
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-message">Message</label>
+                  <textarea id="contact-message" name="message" rows="4" required maxlength="3000" placeholder="Tell me about your project or role..." class="glass-input"></textarea>
+                </div>
+
+                <button type="submit" class="glass-btn primary-glass-btn full-width-btn" id="send-btn" data-tooltip="Dispatch email directly" data-icon="✉">
+                  <span class="btn-shine"></span>
+                  <span class="btn-text">Transmit Message</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </form>
+
+              <div class="form-success-banner" id="form-success" aria-live="polite">
+                <div class="success-icon-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                <div>
+                  <h4>Message Ready to Send!</h4>
+                  <p>Opening your default mail client with pre-filled details.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Sticky Bottom Apple Music-Style "Now Playing / Now Building" Glass Dock -->
+  <aside class="now-playing-dock" aria-label="Now Building Status Widget">
+    <div class="glass-card-panel mini-player-panel" id="now-playing-pill" data-tooltip="Now Playing: SolX 2.0 (SwiftUI Engine)" data-icon="🎵">
+      <div class="glass-specular-highlight"></div>
+      
+      <!-- Album Art / Thumbnail -->
+      <div class="player-art-box">
+        <img src="/images/SolX.png" alt="SolX current focus thumbnail" class="player-thumb-img" />
+        <div class="player-sound-wave" id="sound-wave" aria-hidden="true">
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+          <span class="wave-bar"></span>
+        </div>
+      </div>
+
+      <!-- Track Information -->
+      <div class="player-info">
+        <div class="player-label-row">
+          <span class="player-status-tag">NOW ENGINEERING</span>
+          <span class="player-genre">Swift / iOS</span>
+        </div>
+        <div class="player-title">SolX 2.0 • Golden Hour Architecture</div>
+      </div>
+
+      <!-- Controls -->
+      <div class="player-controls">
+        <button class="player-btn" id="play-pause-btn" aria-label="Pause or play ambient visualization" data-tooltip="Play / Pause Dynamic Canvas" data-icon="⏯">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" id="play-pause-icon">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+
+        <a href="#projects" class="player-view-btn" data-tooltip="Jump to Projects" data-icon="↗">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- Apple-Style Floating iOS Toast Notification -->
+  <div class="glass-toast" id="glass-toast" role="status" aria-live="polite">
+    <div class="toast-content">
+      <div class="toast-icon">
+        <svg width="16" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <span class="toast-message" id="toast-message">Copied to clipboard</span>
+    </div>
+  </div>
+
+  <!-- Interactive Project Modals (Liquid Glass Sheets) -->
+  <div class="modal-backdrop" id="modal-backdrop" aria-hidden="true">
+    
+    <!-- SolX Modal -->
+    <div class="glass-modal-sheet" id="modal-solx" role="dialog" aria-modal="true" aria-labelledby="solx-modal-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Modal" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/solx.jpg" alt="SolX App Interface" />
+        </div>
+        
+        <div class="modal-text-content">
+          <div class="modal-app-brand-row">
+            <img src="/images/SolX.png" alt="SolX Icon" class="modal-app-icon" />
+            <div>
+              <span class="modal-category">iOS Native Application</span>
+              <h2 id="solx-modal-title" class="modal-title">SolX — Golden-Hour Photography Companion</h2>
+            </div>
+          </div>
+          
+          <div class="modal-tags">
+            <span class="tech-tag">Swift</span>
+            <span class="tech-tag">SwiftUI</span>
+            <span class="tech-tag">Astronomical Ephemeris</span>
+            <span class="tech-tag">CoreLocation</span>
+            <span class="tech-tag">AVFoundation</span>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Architecture & Technical Challenge</h3>
+            <p>
+              Photographers and cinematographers require precise down-to-the-minute calculations of the golden hour and blue hour to capture peak natural lighting. SolX implements rigorous spherical trigonometry and NOAA solar position algorithms locally on-device without requiring network calls.
+            </p>
+          </div>
+
+          <div class="modal-specs-grid">
+            <div class="spec-card">
+              <span class="spec-k">Solar Ephemeris</span>
+              <span class="spec-v">±0.01° Azimuth & Altitude Accuracy</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Interface</span>
+              <span class="spec-v">SwiftUI with Spring Gestures</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Offline Capability</span>
+              <span class="spec-v">100% Offline via GPS Sensors</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Haptic Feedback</span>
+              <span class="spec-v">CoreHaptics Solar Dial Ticks</span>
+            </div>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Core Engineering Innovations</h3>
+            <ul>
+              <li><strong>Dynamic Solar Compass:</strong> Real-time device gyroscope and compass fusion visualizing the exact sun trajectory over the horizon.</li>
+              <li><strong>Tactile Shutter Simulation:</strong> Custom manual exposure, ISO, and shutter speed dial with precise mechanical vibration feedback.</li>
+              <li><strong>Zero Cloud Dependency:</strong> All astronomical ephemeris models execute purely in client-side Swift math for remote shooting expeditions.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Powerboat Marketing Modal -->
+    <div class="glass-modal-sheet" id="modal-powerboat-marketing" role="dialog" aria-modal="true" aria-labelledby="pb-marketing-modal-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Modal" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/powerboat-marketing.jpg" alt="MMD Powerboat Marines Marketing App" />
+        </div>
+        
+        <div class="modal-text-content">
+          <div class="modal-app-brand-row">
+            <img src="/images/MMD.png" alt="MMD App Icon" class="modal-app-icon" />
+            <div>
+              <span class="modal-category">Client iOS Application</span>
+              <h2 id="pb-marketing-modal-title" class="modal-title">MMD Powerboat Marines Marketing App</h2>
+            </div>
+          </div>
+          
+          <div class="modal-tags">
+            <span class="tech-tag">Swift</span>
+            <span class="tech-tag">WebKit Bridge</span>
+            <span class="tech-tag">Telemetry API</span>
+            <span class="tech-tag">Luxury UI</span>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Overview & Impact</h3>
+            <p>
+              Built for MMD Powerboat Marines (powerboatmarines.com) to present high-performance powerboat models, twin-engine outboard specifications, and hull hydrodynamics to luxury clients during offshore trials and international expos.
+            </p>
+          </div>
+
+          <div class="modal-specs-grid">
+            <div class="spec-card">
+              <span class="spec-k">Vessel Catalog</span>
+              <span class="spec-v">High-Res 3D Vessel View</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Integration</span>
+              <span class="spec-v">powerboatmarines.com Web Engine</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Client Workflow</span>
+              <span class="spec-v">Direct Lead & Sea Trial Booking</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Platform</span>
+              <span class="spec-v">Optimized for iPad & iPhone</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Powerboat App Modal -->
+    <div class="glass-modal-sheet" id="modal-powerboat-app" role="dialog" aria-modal="true" aria-labelledby="pb-app-modal-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Modal" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/powerboat-app.jpg" alt="Powerboat Marines Mobile Conversion" />
+        </div>
+        
+        <div class="modal-text-content">
+          <div class="modal-app-brand-row">
+            <img src="/images/MMD.png" alt="MMD App Icon" class="modal-app-icon" />
+            <div>
+              <span class="modal-category">Mobile App Platform</span>
+              <h2 id="pb-app-modal-title" class="modal-title">Powerboat Marines Mobile App</h2>
+            </div>
+          </div>
+          
+          <div class="modal-tags">
+            <span class="tech-tag">iOS / Android</span>
+            <span class="tech-tag">Telemetry Dashboard</span>
+            <span class="tech-tag">Offline Caching</span>
+            <span class="tech-tag">RESTful Sync</span>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Web-to-Mobile Transformation</h3>
+            <p>
+              Converted powerboatmarines.com into a full-featured native-feeling mobile experience. Incorporated real-time telemetry gauges displaying vessel speed in knots, GPS coordinates, hull diagnostics, and service maintenance schedules.
+            </p>
+          </div>
+
+          <div class="modal-specs-grid">
+            <div class="spec-card">
+              <span class="spec-k">Telemetry</span>
+              <span class="spec-v">Speed, Fuel Flow, Hull Temp</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Offline Fleet</span>
+              <span class="spec-v">Instant Cache Without Cellular</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Conversion Target</span>
+              <span class="spec-v">iOS & Android App Stores</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BREWME Modal -->
+    <div class="glass-modal-sheet" id="modal-brewme" role="dialog" aria-modal="true" aria-labelledby="brewme-modal-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Modal" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/brewme.jpg" alt="BREWME Cafe Madayipara Eco Park Live Application" />
+        </div>
+        
+        <div class="modal-text-content">
+          <div class="modal-app-brand-row">
+            <img src="/images/brewme.png" alt="BREWME Brand Icon" class="modal-app-icon" />
+            <div>
+              <span class="modal-category">Commercial Web Platform • React 18 & Framer Motion</span>
+              <h2 id="brewme-modal-title" class="modal-title">BREWME Cafe — The Complete Coffee Shop Solution</h2>
+            </div>
+          </div>
+          
+          <div class="modal-tags">
+            <span class="tech-tag">React 18</span>
+            <span class="tech-tag">Tailwind CSS</span>
+            <span class="tech-tag">Framer Motion</span>
+            <span class="tech-tag">QR Table Menu</span>
+            <span class="tech-tag">Vercel Deployment</span>
+            <span class="tech-tag">Madayipara, Kannur</span>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Overview & Atmosphere</h3>
+            <p>
+              Engineered for BREWME Cafe located at Madayipara Eco Park, Pazhayangadi, Kannur, Kerala (12°01'N 75°15'E). Perched on an ancient laterite hilltop plateau overlooking the Arabian Sea, BREWME is a beloved sunset destination for evening chaya, fresh burgers, and peri-peri loaded fries. This web application delivers a seamless digital experience for visitors seated at outdoor hilltop tables.
+            </p>
+          </div>
+
+          <div class="modal-specs-grid">
+            <div class="spec-card">
+              <span class="spec-k">Framework</span>
+              <span class="spec-v">React 18 + Vite SPA</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Styling & Physics</span>
+              <span class="spec-v">Tailwind CSS + Framer Motion</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Location Setting</span>
+              <span class="spec-v">Madayipara Eco Park, Kannur</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Live Deployment</span>
+              <span class="spec-v">Vercel Edge Network</span>
+            </div>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Core Engineering & Interactive Features</h3>
+            <ul>
+              <li><strong>Dynamic QR Table Menu:</strong> Fast-loading mobile-first digital menu organized into Burgers, Sandwiches, Loaded Fries, Hot Chaya & Coffee, Boost, and Shakes with price breakdown.</li>
+              <li><strong>Interactive Platter & Combo Builder:</strong> Dynamic combo configurator for Sunset Chai & Fries, Zinger Feast Boxes, and Loaded Fries Platters with real-time price calculation and seasoning level sliders.</li>
+              <li><strong>Sensory Flavour Radar:</strong> Custom animated Framer Motion radar scales evaluating each recipe's Crunch, Melt, Spice, and Aroma metrics on a 100-point scale.</li>
+              <li><strong>Eco Park Cleanliness & Location Integration:</strong> Live operating hours (Daily 3:00 PM – 11:00 PM), Google Maps navigation pin to Madayipara, and hygiene-first kitchen presentation.</li>
+              <li><strong>Integrated Admin Management:</strong> Secure triple-click admin access for real-time menu management and order processing.</li>
+            </ul>
+          </div>
+
+          <div class="modal-cta-row" style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="https://brewme-the-complete-coffee-shop-sol.vercel.app" target="_blank" rel="noopener noreferrer" class="glass-btn primary-glass-btn">
+              <span>Launch Live Web Application</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+            <a href="https://github.com/disneymio" target="_blank" rel="noopener noreferrer" class="glass-btn secondary-glass-btn">
+              <span>GitHub Repository</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Engineering Philosophy Modal -->
+    <div class="glass-modal-sheet" id="modal-transition-story" role="dialog" aria-modal="true" aria-labelledby="story-modal-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Modal" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/ios-engineer-hero.jpg" alt="iOS Engineering Philosophy Visual" />
+        </div>
+
+        <div class="modal-text-content">
+          <span class="modal-category">Engineering Philosophy</span>
+          <h2 id="story-modal-title" class="modal-title">Native Apple Architecture & Liquid UI Philosophy</h2>
+
+          <div class="modal-section-block">
+            <h3>1. The 120Hz Fluidity Standard</h3>
+            <p>
+              Every swipe, sheet drag, and glass transition in iOS must execute with mathematical precision. By utilizing declarative SwiftUI state bindings, minimal view hierarchy redraws, and off-main-thread compute, I craft applications that sustain 120fps ProMotion fluidity under heavy loads.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>2. Low-Level Systems Discipline</h3>
+            <p>
+              My foundation in C and C++ allows me to understand memory layouts, retain cycles, ARC overhead, and thread scheduling. I don’t treat frameworks as black boxes — I optimize data flow and cache access patterns from the ground up.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>3. Modern Full-Stack Symbiosis</h3>
+            <p>
+              An iOS app is only as fast as its backend pipe. With strong knowledge of RESTful API design, Node.js, and modern web architectures, I engineer end-to-end solutions that marry native mobile finesse with robust server infrastructures.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resume Preview / Download Sheet Modal -->
+    <div class="glass-modal-sheet resume-modal-sheet" id="modal-resume" role="dialog" aria-modal="true" aria-labelledby="resume-sheet-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Resume" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body resume-modal-body">
+        <div class="resume-sheet-header">
+          <div>
+            <span class="modal-category">Official Curriculum Vitae</span>
+            <h2 id="resume-sheet-title" class="modal-title">Muhammed Midlaj K</h2>
+            <p class="resume-subtitle">iOS Engineer (Swift • SwiftUI • Full-Stack)</p>
+          </div>
+          <div class="resume-sheet-cta">
+            <button class="glass-btn primary-glass-btn" id="print-resume-btn" onclick="window.print()" data-tooltip="Print or export as PDF" data-icon="🖨">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              <span>Print / Save as PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Rendered Resume Content Sheet -->
+        <div class="resume-paper-preview" id="resume-paper">
+          <div class="resume-doc-header">
+            <div class="doc-title-block">
+              <h1>Muhammed Midlaj K</h1>
+              <div class="doc-tagline">iOS Engineer • Swift & Full-Stack</div>
+            </div>
+            <div class="doc-contact-block">
+              <div>📧 disney.mio@icloud.com</div>
+              <div>📱 +91 80866 69437</div>
+              <div>🌐 github.com/midlaj-tech</div>
+              <div>💼 linkedin.com/in/muhammed-midlaj-927458238</div>
+            </div>
+          </div>
+
+          <hr class="resume-divider" />
+
+          <div class="resume-doc-section">
+            <h3>Professional Profile</h3>
+            <p>
+              Dedicated and detail-oriented iOS Engineer with a Bachelor of Computer Applications (BCA) and professional experience developing high-performance native iOS applications and mobile platforms. Specializes in Swift, SwiftUI, modern Apple Human Interface Guidelines, and AI-accelerated workflows (Antigravity, Claude Code, Cursor).
+            </p>
+          </div>
+
+          <div class="resume-doc-section">
+            <h3>Technical Skills & Tooling</h3>
+            <div class="resume-skill-row">
+              <strong>Native iOS & Apple:</strong> Swift, SwiftUI, UIKit, CoreLocation, AVFoundation, CoreHaptics, Combine, SwiftData, Instruments
+            </div>
+            <div class="resume-skill-row">
+              <strong>AI & Modern Tools:</strong> Google Antigravity, Claude Code, Cursor, Git, Terminal Automation
+            </div>
+            <div class="resume-skill-row">
+              <strong>Core Languages:</strong> C, C++, Python, JavaScript (ES6+), HTML5, Vanilla CSS3, MySQL
+            </div>
+            <div class="resume-skill-row">
+              <strong>Web & Ecosystem:</strong> React, Responsive UI/UX, REST APIs, Node.js runtime, Performance Optimization
+            </div>
+            <div class="resume-skill-row">
+              <strong>Architecture & CS:</strong> Object-Oriented Design, Data Structures & Algorithms, Relational DBs
+            </div>
+          </div>
+
+          <div class="resume-doc-section">
+            <h3>Professional Experience</h3>
+            <div class="resume-job">
+              <div class="job-header">
+                <strong>iOS & Systems Engineer — MMD Powerboat Marines Pvt Ltd</strong>
+                <span class="job-period">Present</span>
+              </div>
+              <ul>
+                <li>Spearheaded digital mobile infrastructure and end-to-end app ecosystem conversion for powerboatmarines.com.</li>
+                <li>Architected native iOS client showcase tools and high-performance interactive specs visualizations.</li>
+                <li>Engineered offline telemetry caching and live mobile diagnostic dashboards for field clients.</li>
+              </ul>
+            </div>
+            <div class="resume-job" style="margin-top: 12px;">
+              <div class="job-header">
+                <strong>Independent iOS Engineer & App Architect</strong>
+                <span class="job-period">2024 — Present</span>
+              </div>
+              <ul>
+                <li>Engineered SolX: native iOS golden-hour camera tool with real-time astronomical ephemeris computation.</li>
+                <li>Implemented custom tactile shutter dials with CoreHaptics and local NOAA solar position models.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="resume-doc-section">
+            <h3>Featured Projects</h3>
+            <div class="resume-project-item">
+              <strong>SolX (iOS App):</strong> Native iOS application for golden-hour photography with astronomical ephemeris calculations and camera shutter controls (Swift, SwiftUI).
+            </div>
+            <div class="resume-project-item">
+              <strong>MMD Powerboat Marines Marketing App:</strong> Dedicated iOS vessel showcase for international yacht expos.
+            </div>
+            <div class="resume-project-item">
+              <strong>Powerboat Marines Mobile App:</strong> End-to-end mobile conversion of powerboatmarines.com with offline vessel catalog.
+            </div>
+            <div class="resume-project-item">
+              <strong>BREWME Cafe:</strong> Commercial web platform for Madayipara Eco Park cafe in Kannur, featuring dynamic QR table menu, interactive feast platter builder, real-time pricing multipliers, and Framer Motion micro-interactions.
+            </div>
+          </div>
+
+          <div class="resume-doc-section">
+            <h3>Education</h3>
+            <div class="resume-edu">
+              <strong>Bachelor of Computer Applications (BCA)</strong>
+              <div>Foundations in Object-Oriented Programming, Data Structures, Algorithms, DBMS, and Network Systems.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Blog Modal 1: Liquid Glass UI in SwiftUI -->
+    <div class="glass-modal-sheet" id="modal-blog-liquid-glass" role="dialog" aria-modal="true" aria-labelledby="blog-1-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Article" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body blog-modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/ios-engineer-hero.jpg" alt="SwiftUI Liquid Glass Architecture" />
+        </div>
+
+        <div class="modal-text-content">
+          <div class="article-meta-header">
+            <span class="modal-category">SwiftUI • HIG Architecture</span>
+            <span class="article-meta-sep">•</span>
+            <span class="article-meta-time">September 2026 • 6 min read</span>
+          </div>
+
+          <h2 id="blog-1-title" class="modal-title">Architecting Liquid Glass UI in SwiftUI: Apple Music & Control Center</h2>
+
+          <div class="article-lead-box glass-card-panel">
+            <p>
+              How do you replicate the vibrant, reactive translucent materials found in Apple Music and iOS Control Center while maintaining an uncompromised 120fps ProMotion refresh rate? Here is the complete architectural breakdown.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>1. The Physics of Apple Liquid Glass</h3>
+            <p>
+              Traditional glassmorphism often relies on a simple Gaussian blur with a light white overlay. However, Apple’s native implementation in Control Center and Apple Music uses a composite multi-stage pipeline:
+            </p>
+            <ul>
+              <li><strong>Dynamic Ambient Mesh:</strong> Color orbs bleed from album artwork or background elements with anisotropic scaling.</li>
+              <li><strong>Variable Saturation Boost:</strong> Increasing color saturation behind the glass (upwards of 200%) prevents dull, milky gray washed-out regions.</li>
+              <li><strong>Specular Lens Edge Highlights:</strong> A micro-thin 1px convex refractive highlight that captures directional lighting angles.</li>
+            </ul>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>2. SwiftUI Implementation: Materials & Metal Shaders</h3>
+            <p>
+              In SwiftUI on iOS 17+, we can compose custom view modifiers utilizing <code>.ultraThinMaterial</code> alongside Metal shader passes for real-time chromatic aberration:
+            </p>
+            <pre class="code-snippet-box"><code>struct LiquidGlassModifier: ViewModifier {
+    var cornerRadius: CGFloat = 28
+    
+    func body(content: Content) -> some View {
+        content
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .colorMultiply(Color.white.opacity(0.85))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .strokeBorder(
+                        LinearGradient(
+                            colors: [
+                                .white.opacity(0.65),
+                                .white.opacity(0.1),
+                                .clear
+                            ],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            )
+            .shadow(color: .black.opacity(0.12), radius: 20, x: 0, y: 10)
+    }
+}</code></pre>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>3. The 120Hz Fluidity Rule</h3>
+            <p>
+              Heavy blurs without GPU caching will instantly drop frames on devices with ProMotion displays. To sustain a lock-solid 120fps:
+            </p>
+            <ul>
+              <li>Isolate blur layers from frequently updated state variables.</li>
+              <li>Use <code>.drawingGroup()</code> when composing layered vector shapes with continuous blend modes.</li>
+              <li>Prefer hardware-accelerated spring animations (<code>.spring(response: 0.35, dampingFraction: 0.8)</code>) over linear transitions.</li>
+            </ul>
+          </div>
+
+          <div class="modal-section-block">
+            <div class="highlight-chip full-chip">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Key Takeaway:</strong> High-end Apple UI is defined by specular physics and 120fps responsiveness. Liquid glass transforms a good app into an unforgettable physical tactile experience.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Modal 2: Precision Solar Ephemeris in SolX -->
+    <div class="glass-modal-sheet" id="modal-blog-ephemeris" role="dialog" aria-modal="true" aria-labelledby="blog-2-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Article" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body blog-modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/solx.jpg" alt="SolX Solar Ephemeris Engine" />
+        </div>
+
+        <div class="modal-text-content">
+          <div class="article-meta-header">
+            <span class="modal-category">Swift • Astronomical Algorithms</span>
+            <span class="article-meta-sep">•</span>
+            <span class="article-meta-time">August 2026 • 8 min read</span>
+          </div>
+
+          <h2 id="blog-2-title" class="modal-title">Precision Solar Ephemeris in Swift: The Math Powering SolX</h2>
+
+          <div class="article-lead-box glass-card-panel">
+            <p>
+              When photographers travel to remote summits or coastlines with zero cellular reception, they depend on SolX to know down to the second when golden hour begins. Here is how we engineered offline sub-second astronomical precision on iOS.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>1. The Trigonometry of Solar Coordinates</h3>
+            <p>
+              Calculating solar azimuth and elevation without an external API requires solving Kepler's equation of planetary motion and translating equatorial coordinates into a local topocentric horizon coordinate system:
+            </p>
+            <ul>
+              <li><strong>Julian Day Epoch (JD):</strong> Converting UTC timestamps into centuries from J2000.0.</li>
+              <li><strong>Geometric Mean Longitude & Anomaly:</strong> Deriving the Earth’s eccentric orbital trajectory around the Sun.</li>
+              <li><strong>Local Sidereal Time (LST):</strong> Factoring in exact GPS latitude, longitude, and elevation above sea level.</li>
+            </ul>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>2. Acceleration with Apple SIMD & Accelerate</h3>
+            <p>
+              Calculating solar trajectory arcs for every minute of a 24-hour cycle would produce noticeable UI hitching if done via naive scalar loops. By utilizing Apple's <code>simd_float4</code> vector math, we calculate all 1,440 diurnal data points in under 0.8 milliseconds:
+            </p>
+            <pre class="code-snippet-box"><code>import Accelerate
+import simd
+
+struct SolarVectorMath {
+    /// Computes atmospheric refraction correction angle
+    static func refractionCorrection(trueElevation: Double) -> Double {
+        guard trueElevation > -1.0 else { return 0.0 }
+        let h = max(trueElevation, -0.575)
+        return (1.02 / tan((h + 10.3 / (h + 5.11)) * .pi / 180.0)) / 60.0
+    }
+}</code></pre>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>3. Sensor Fusion: Combining Gyro & CoreLocation</h3>
+            <p>
+              SolX displays an augmented live sun-compass trajectory over the camera viewfinder. We fuse <code>CMDeviceMotion</code> heading with CoreLocation true heading to eliminate magnetic declination distortion and calibrate for sudden device tilts.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <div class="highlight-chip full-chip">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Key Takeaway:</strong> Mathematical autonomy is the hallmark of great native software. By eliminating network dependencies, SolX delivers uncompromising speed and reliability anywhere on Earth.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Modal 3: Autonomous AI Workflows -->
+    <div class="glass-modal-sheet" id="modal-blog-agentic-ai" role="dialog" aria-modal="true" aria-labelledby="blog-3-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Article" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body blog-modal-body">
+        <div class="modal-hero-image" style="background: radial-gradient(circle at center, rgba(16,24,40,0.95), rgba(5,8,16,1)); display: flex; align-items: center; justify-content: center; padding: 30px;">
+          <img src="/images/Antigravity.png" alt="Autonomous AI Engineering Workflow" style="max-height: 180px; object-fit: contain;" />
+        </div>
+
+        <div class="modal-text-content">
+          <div class="article-meta-header">
+            <span class="modal-category">AI Engineering • Autonomous Tooling</span>
+            <span class="article-meta-sep">•</span>
+            <span class="article-meta-time">July 2026 • 5 min read</span>
+          </div>
+
+          <h2 id="blog-3-title" class="modal-title">The Agentic iOS Engineer: Antigravity, Claude Code & MCP</h2>
+
+          <div class="article-lead-box glass-card-panel">
+            <p>
+              AI tooling for software engineers has evolved past basic inline autocomplete. Today, agentic workflows with autonomous tool execution, subagent orchestration, and Model Context Protocol (MCP) enable engineers to build complex native architectures at 10x velocity.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>1. The Shift to Autonomous Agent Loops</h3>
+            <p>
+              In traditional copilot workflows, the developer remains the sole executor of every edit, compilation, and test run. In an agentic environment (such as Google Antigravity or Claude Code):
+            </p>
+            <ul>
+              <li>The agent inspects files, runs build commands, reads logs, and isolates regression errors autonomously.</li>
+              <li>Hierarchical subagents divide tasks: while one drafts UI views, another verifies data layer invariants.</li>
+              <li>Custom Skills encode domain knowledge (such as Apple HIG standards or Swift 6 concurrency patterns).</li>
+            </ul>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>2. Model Context Protocol (MCP) in Mobile Projects</h3>
+            <p>
+              MCP bridges the gap between language models and local machine tools. By exposing Xcode project configurations, test fixtures, and Simulator logs over standard protocols, the agent can debug real iOS issues in real time without human intervention.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>3. Human In The Loop: Taste & Architecture</h3>
+            <p>
+              Tools like Antigravity do not replace the engineer — they amplify engineering judgment. The human’s role elevates from typing repetitive boilerplate to directing system architecture, enforcing aesthetics, and validating user ergonomics.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <div class="highlight-chip full-chip">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Key Takeaway:</strong> Mastering AI agent workflows is now a core superpower for software engineers. Those who harness autonomous pair-programming tools build higher quality software faster than ever before.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Modal 5: Aether Audio Engine -->
+    <div class="glass-modal-sheet" id="modal-project-aether" role="dialog" aria-modal="true" aria-labelledby="aether-modal-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Modal" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body">
+        <div class="modal-hero-image">
+          <img src="/images/solx.jpg" alt="Aether Audio Engine Interface" />
+        </div>
+        
+        <div class="modal-text-content">
+          <div class="modal-app-brand-row">
+            <div class="project-avatar audio-glow" style="width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, rgba(255,45,85,0.2), rgba(88,86,214,0.3)); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); font-size: 24px;">🎧</div>
+            <div>
+              <span class="modal-category">Native iOS &amp; AudioDSP</span>
+              <h2 id="aether-modal-title" class="modal-title">Aether — Real-Time Spatial Audio Engine</h2>
+            </div>
+          </div>
+          
+          <div class="modal-tags">
+            <span class="tech-tag">Swift</span>
+            <span class="tech-tag">AudioUnit v3</span>
+            <span class="tech-tag">AVAudioEngine</span>
+            <span class="tech-tag">Metal</span>
+            <span class="tech-tag">Spatial Audio</span>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Architecture &amp; Technical Challenge</h3>
+            <p>
+              Professional sound designers require zero-latency spatial acoustic positioning for interactive multimedia and AR/VR environments. Aether leverages Apple's AVAudioEngine and low-level C++ Audio Units wrapped in strict Swift 6 actor-isolated pipelines to achieve sub-5ms round-trip DSP processing.
+            </p>
+          </div>
+
+          <div class="modal-specs-grid">
+            <div class="spec-card">
+              <span class="spec-k">DSP Latency</span>
+              <span class="spec-v">&lt; 4.2ms Audio Buffer Ring</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Audio Architecture</span>
+              <span class="spec-v">AUv3 + AVAudioEngine Nodes</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Spatialization</span>
+              <span class="spec-v">HRTF Convolution Filters</span>
+            </div>
+            <div class="spec-card">
+              <span class="spec-k">Concurrency</span>
+              <span class="spec-v">Swift 6 Real-time Non-blocking Actors</span>
+            </div>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>Key Audio Engineering Highlights</h3>
+            <ul>
+              <li><strong>Lock-Free Audio Ring Buffers:</strong> Atomic memory queues ensuring the real-time audio render thread is never blocked by memory allocations.</li>
+              <li><strong>Metal Accelerate Convolutions:</strong> Fast Fourier Transform (vDSP/FFT) executed via Apple Accelerate framework for spatial reverberation.</li>
+              <li><strong>CoreMotion Head Tracking:</strong> Headphone orientation sensor tracking synchronizing sound field orientation dynamically.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Modal 4: BLE Telemetry -->
+    <div class="glass-modal-sheet" id="modal-blog-ble" role="dialog" aria-modal="true" aria-labelledby="blog-4-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Article" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body blog-modal-body">
+        <div class="modal-hero-image" style="background: radial-gradient(circle at center, rgba(14,165,233,0.25), rgba(5,8,16,1)); display: flex; align-items: center; justify-content: center; padding: 30px;">
+          <div style="font-size: 64px; filter: drop-shadow(0 0 20px rgba(14,165,233,0.6));">📡</div>
+        </div>
+
+        <div class="modal-text-content">
+          <div class="article-meta-header">
+            <span class="modal-category">#CoreBluetooth #BLE #Swift6 #IoT #iOSArchitecture</span>
+            <span class="article-meta-sep">•</span>
+            <span class="article-meta-time">August 2026 • 7 min read</span>
+          </div>
+
+          <h2 id="blog-4-title" class="modal-title">Low-Power BLE Telemetry Streaming on iOS: CoreBluetooth Demystified</h2>
+
+          <div class="article-lead-box glass-card-panel">
+            <p>
+              High-frequency Bluetooth Low Energy streaming requires delicate buffering, actor isolation, and memory recycling to sustain 60Hz sensor packets with near-zero energy consumption.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>1. The Central Manager &amp; Background State Preservation</h3>
+            <p>
+              To maintain uninterrupted telemetric tracking when the host app transitions to background or suspended state, iOS requires rigorous Central Manager state preservation:
+            </p>
+            <ul>
+              <li><strong>CBCentralManagerOptionRestoreIdentifierKey:</strong> Reconnecting to active peripherals after system-initiated daemon recovery.</li>
+              <li><strong>MTU Size Optimization:</strong> Negotiating 512-byte Maximum Transmission Unit (MTU) to pack telemetry frames efficiently.</li>
+              <li><strong>Actor-based Command Queuing:</strong> Preventing race conditions during simultaneous Characteristic read/write bursts.</li>
+            </ul>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>2. Swift 6 Concurrency &amp; AsyncStream Telemetry</h3>
+            <p>
+              Converting legacy delegate callbacks into modern asynchronous streams:
+            </p>
+            <pre class="code-snippet-box"><code>actor BluetoothTelemetryService {
+    private var continuation: AsyncStream&lt;TelemetryPacket&gt;.Continuation?
+
+    var telemetryStream: AsyncStream&lt;TelemetryPacket&gt; {
+        AsyncStream { cont in
+            self.continuation = cont
+        }
+    }
+
+    func didUpdateValue(data: Data) {
+        guard let packet = TelemetryPacket.parse(from: data) else { return }
+        continuation?.yield(packet)
+    }
+}</code></pre>
+          </div>
+
+          <div class="modal-section-block">
+            <div class="highlight-chip full-chip">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Key Takeaway:</strong> Isolating CoreBluetooth delegates behind Swift 6 Actors prevents main-thread bottlenecks and delivers battery-efficient streaming at high frequencies.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Modal 5: SwiftData Concurrency -->
+    <div class="glass-modal-sheet" id="modal-blog-swiftdata" role="dialog" aria-modal="true" aria-labelledby="blog-5-title">
+      <div class="glass-specular-highlight"></div>
+      <button class="modal-close-btn" aria-label="Close modal" data-tooltip="Close Article" data-icon="✕">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+
+      <div class="modal-body blog-modal-body">
+        <div class="modal-hero-image" style="background: radial-gradient(circle at center, rgba(168,85,247,0.25), rgba(5,8,16,1)); display: flex; align-items: center; justify-content: center; padding: 30px;">
+          <div style="font-size: 64px; filter: drop-shadow(0 0 20px rgba(168,85,247,0.6));">⚡</div>
+        </div>
+
+        <div class="modal-text-content">
+          <div class="article-meta-header">
+            <span class="modal-category">#SwiftData #SwiftConcurrency #iOS #CoreData #Database</span>
+            <span class="article-meta-sep">•</span>
+            <span class="article-meta-time">September 2026 • 6 min read</span>
+          </div>
+
+          <h2 id="blog-5-title" class="modal-title">High-Performance SwiftData: Concurrent Background Contexts &amp; Batch Sync</h2>
+
+          <div class="article-lead-box glass-card-panel">
+            <p>
+              Scaling local-first persistence requires decoupling UI @Query macros from high-volume ingestion streams. Here is how to architect ModelActor background workers without context race conditions.
+            </p>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>1. The ModelActor Protocol</h3>
+            <p>
+              SwiftData introduces the <code>ModelActor</code> protocol to safely isolate background database operations from the <code>@MainActor</code> SwiftUI rendering engine:
+            </p>
+            <ul>
+              <li><strong>Dedicated ModelExecutor:</strong> Guarantees sequential execution of model mutations.</li>
+              <li><strong>Zero UI Hitching:</strong> Ingesting thousands of records while maintaining 120Hz ProMotion animations.</li>
+              <li><strong>Persistent Identifiers:</strong> Passing <code>PersistentIdentifier</code> across isolation domains instead of live model instances.</li>
+            </ul>
+          </div>
+
+          <div class="modal-section-block">
+            <h3>2. High-Throughput Batch Processing</h3>
+            <pre class="code-snippet-box"><code>@ModelActor
+actor DataSyncWorker {
+    func ingestBatch(_ items: [RemoteEntityDTO]) throws {
+        for dto in items {
+            let model = ItemModel(dto: dto)
+            modelContext.insert(model)
+        }
+        try modelContext.save()
+    }
+}</code></pre>
+          </div>
+
+          <div class="modal-section-block">
+            <div class="highlight-chip full-chip">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Key Takeaway:</strong> With ModelActor, SwiftData eliminates the painful threading issues of legacy CoreData while retaining native speed and elegant Swift syntax.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="glass-footer">
+    <div class="content-container footer-inner">
+      <div class="footer-left">
+        <div class="footer-brand">Muhammed Midlaj K</div>
+        <p class="footer-copy">Crafted with Apple Music & Control Center Liquid Glass. Native iOS Engineering & Modern Web Craft.</p>
+      </div>
+
+      <div class="footer-right">
+        <ul class="footer-links">
+          <li><a href="https://github.com/midlaj-tech" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://linkedin.com/in/muhammed-midlaj-927458238" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="mailto:disney.mio@icloud.com">Email</a></li>
+          <li><a href="tel:+918086669437">Phone</a></li>
+          <li><a href="https://wa.me/918086669437" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+        </ul>
+        <div class="footer-copyright">
+          © 2026 Muhammed Midlaj K. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

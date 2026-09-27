@@ -1,0 +1,92 @@
+name: Build Android APK
+
+on:
+  push:
+    paths:
+      - 'android/**'
+      - '.github/workflows/build-apk.yml'
+      - 'index.html'
+      - 'admin.html'
+      - 'admin.js'
+      - 'admin.css'
+      - 'data-store.js'
+      - 'public/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & Package APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Node Dependencies
+        run: npm ci
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Copy Built Web Assets to Android Assets Directory
+        run: |
+          mkdir -p android/app/src/main/assets/www
+          cp -r dist/* android/app/src/main/assets/www/
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant Execute Permission to Gradlew
+        run: chmod +x android/gradlew
+
+      - name: Build Android APK
+        run: |
+          cd android
+          ./gradlew assembleRelease --stacktrace
+
+      - name: Rename APK for Pixel 8
+        run: |
+          mkdir -p dist-apk
+          cp android/app/build/outputs/apk/release/app-release.apk dist-apk/AdminStudio-Pixel8.apk
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AdminStudio-Pixel8-APK
+          path: dist-apk/AdminStudio-Pixel8.apk
+          retention-days: 30
+
+      - name: Release APK
+        uses: softprops/action-gh-release@v2
+        if: github.ref == 'refs/heads/main'
+        with:
+          tag_name: v1.0.0-apk
+          name: "📱 Admin Studio for Google Pixel 8"
+          body: |
+            ### 📱 Admin Studio Android APK (Google Pixel 8)
+            
+            - **Native Biometrics**: Google Pixel 8 Fingerprint and Face Unlock via Android `BiometricPrompt`.
+            - **Zero Passcode Typing**: Directly authenticates your master admin session using your device biometric.
+            - **Complete Admin Control**: Manage Skills, Projects, Blogs, Now Engineering, Direct Messages, and Telemetry.
+            - **Offline & Live**: Works offline with built-in assets and supports file uploads for resume/avatar.
+            
+            #### 📥 Installation on Pixel 8:
+            1. Download **`AdminStudio-Pixel8.apk`** below on your phone.
+            2. Open the downloaded file and tap **Install**.
+            3. Touch the fingerprint sensor to unlock!
+          files: dist-apk/AdminStudio-Pixel8.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,5 @@
+# Allow search engines to index public portfolio pages
+User-agent: *
+Disallow: /admin.html
+Disallow: /admin
+Allow: /
