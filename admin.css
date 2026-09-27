@@ -375,7 +375,8 @@
 .dashboard-header-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .live-sync-pill {

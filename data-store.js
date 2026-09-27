@@ -647,6 +647,28 @@ class PortfolioDataStore {
     return this.getItem(STORAGE_KEYS.METRICS, DEFAULT_METRICS);
   }
 
+  resetMetrics() {
+    const emptyMetrics = {
+      resumeClicks: 0,
+      githubClicks: 0,
+      linkedinClicks: 0,
+      mailClicks: 0,
+      phoneClicks: 0,
+      whatsappClicks: 0,
+      dailyHistory: [
+        { date: 'Mon', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
+        { date: 'Tue', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
+        { date: 'Wed', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
+        { date: 'Thu', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
+        { date: 'Fri', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
+        { date: 'Sat', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
+        { date: 'Sun', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 }
+      ]
+    };
+    this.setItem(STORAGE_KEYS.METRICS, emptyMetrics);
+    return emptyMetrics;
+  }
+
   trackClick(metricKey) {
     const metrics = this.getMetrics();
     const keyMap = {

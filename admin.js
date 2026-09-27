@@ -343,6 +343,22 @@ function initDashboardMetrics() {
     ringsRefreshBtn.addEventListener('click', () => triggerRefresh(ringsRefreshBtn));
   }
 
+  const resetBtn = document.getElementById('reset-metrics-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      showConfirmModal(
+        'Reset Telemetry Counters',
+        'Are you sure you want to reset all link clicks, profile reach, and resume download counts to zero?',
+        () => {
+          dataStore.resetMetrics();
+          renderDashboardMetrics();
+          drawHealthTrendChart();
+          showToast('All click counters and resume downloads reset to zero!');
+        }
+      );
+    });
+  }
+
   // Chart filter buttons
   document.querySelectorAll('[data-chart-filter]').forEach(btn => {
     btn.addEventListener('click', (e) => {
