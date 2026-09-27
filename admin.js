@@ -301,6 +301,9 @@ function initNavigationTabs() {
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
 
+      // Smoothly scroll active tab into view in horizontal container
+      btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
       tabPanes.forEach(pane => {
         if (pane.id === targetId) {
           pane.classList.add('active');
@@ -1052,14 +1055,14 @@ function initProjectsStudio() {
             <div class="item-logo-box"><img src="${escapeHtml(sanitizeUrl(p.logoUrl, '/images/SolX.png'))}" alt="${escapeHtml(p.title)}" class="item-logo-img" /></div>
             <div class="item-title-block">
               <h4>${escapeHtml(p.title)}</h4>
-              <span class="file-chosen-name">${escapeHtml(p.subtitle || '')}</span>
+              <span class="item-subtitle-text">${escapeHtml(p.subtitle || '')}</span>
             </div>
           </div>
         </div>
         <p class="item-card-desc">${escapeHtml(p.desc)}</p>
         <div class="project-tag-chips">${tagHtml}</div>
         <div class="item-card-actions">
-          <span class="file-chosen-name">${escapeHtml(p.subtitle || '')}</span>
+          <span class="project-tag-chip" style="font-size: 0.72rem; font-weight: 700; text-transform: uppercase;">${escapeHtml(p.category)}</span>
           <div class="action-buttons-group">
             <button class="glass-pill-btn mini-btn edit-proj-btn" data-id="${p.id}">Edit</button>
             <button class="glass-pill-btn mini-btn danger-pill-btn delete-proj-btn" data-id="${p.id}">Delete</button>
@@ -1104,6 +1107,8 @@ function initProjectsStudio() {
       document.getElementById('proj-live').value = p.liveUrl || '';
       customLogoData = p.logoUrl;
       customCoverData = p.coverUrl;
+      if (p.logoUrl) document.getElementById('proj-logo-name').textContent = p.logoUrl.split('/').pop();
+      if (p.coverUrl) document.getElementById('proj-cover-name').textContent = p.coverUrl.split('/').pop();
     } else {
       document.getElementById('project-modal-title').textContent = 'Add New Project';
       form.reset();

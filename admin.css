@@ -222,7 +222,9 @@
 
 .admin-nav-wrapper {
   position: sticky;
-  top: 14px;
+  top: max(12px, env(safe-area-inset-top, 12px));
+  z-index: 100;
+  transition: all 0.3s ease;
 }
 
 .admin-glass-nav {
@@ -233,39 +235,59 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 16px;
+  border-radius: var(--radius-pill);
 }
 
 .admin-tabs-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
+  min-width: 0;
+  width: 100%;
 }
 
 .admin-tabs-container::-webkit-scrollbar {
   display: none;
 }
 
-.admin-nav-pills {
-  flex-wrap: nowrap;
-  gap: 3px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 9999px;
-  padding: 3px 4px;
+.admin-nav-pills,
+.admin-tabs-container .apple-segmented-control {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  gap: 4px !important;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-radius: 9999px !important;
+  padding: 3px 5px !important;
+  box-sizing: border-box !important;
 }
 
-:root[data-theme="dark"] .admin-nav-pills {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.14);
+:root[data-theme="dark"] .admin-nav-pills,
+:root[data-theme="dark"] .admin-tabs-container .apple-segmented-control {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
 }
 
-.admin-nav-pills .seg-item {
-  height: 34px;
-  padding: 0 14px;
-  font-size: 0.82rem;
-  gap: 6px;
-  border-radius: 9999px;
+.admin-nav-pills .seg-item,
+.admin-tabs-container .seg-item {
+  flex: 0 0 auto !important;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  height: 34px !important;
+  padding: 0 14px !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  gap: 6px !important;
+  border-radius: 9999px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .admin-badge-count {
@@ -995,7 +1017,7 @@
   gap: 8px;
 }
 
-/* Project Specific Cards */
+/* Project Specific Cards & Authentic iOS App Icon Styling */
 .projects-admin-grid {
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
 }
@@ -1006,6 +1028,79 @@
   border-radius: var(--radius-sm);
   object-fit: cover;
   background: #000;
+  border: 1px solid var(--glass-border);
+}
+
+.projects-admin-grid .item-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.projects-admin-grid .item-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.projects-admin-grid .item-logo-box {
+  width: 52px;
+  height: 52px;
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.projects-admin-grid .item-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  display: block;
+}
+
+.projects-admin-grid .item-title-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  flex: 1;
+  gap: 3px;
+}
+
+.projects-admin-grid .item-title-block h4 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.projects-admin-grid .item-subtitle-text {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 .project-tag-chips {
@@ -1531,22 +1626,74 @@
 }
 
 @media (max-width: 768px) {
+  .admin-nav-wrapper {
+    top: max(8px, env(safe-area-inset-top, 8px));
+    padding: 0 10px;
+  }
+
   .admin-glass-nav {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "brand actions"
+      "tabs tabs";
+    align-items: center;
     height: auto;
-    padding: 12px;
-    gap: 12px;
+    padding: 10px 14px 10px 14px;
+    gap: 10px 12px;
+    border-radius: 22px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.12);
+  }
+
+  .nav-brand-container {
+    grid-area: brand;
+    justify-self: start;
+    min-width: 0;
   }
 
   .admin-nav-actions {
-    width: 100%;
-    justify-content: space-between;
+    grid-area: actions;
+    justify-self: end;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
   }
 
   .admin-tabs-container {
+    grid-area: tabs;
     width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    display: flex;
     justify-content: flex-start;
+    align-items: center;
+    padding: 2px 0 3px 0;
+    margin: 0;
+  }
+
+  .admin-nav-pills,
+  .admin-tabs-container .apple-segmented-control {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    gap: 5px !important;
+    padding: 3px 4px !important;
+    border-radius: 9999px !important;
+  }
+
+  .admin-nav-pills .seg-item,
+  .admin-tabs-container .seg-item {
+    flex: 0 0 auto !important;
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    height: 33px !important;
+    padding: 0 13px !important;
+    font-size: 0.8rem !important;
   }
 
   .metrics-cards-grid {
@@ -1574,6 +1721,39 @@
 }
 
 @media (max-width: 480px) {
+  .admin-nav-wrapper {
+    top: max(6px, env(safe-area-inset-top, 6px));
+    padding: 0 8px;
+  }
+
+  .admin-glass-nav {
+    padding: 9px 12px 9px 12px;
+    gap: 8px 10px;
+    border-radius: 20px;
+  }
+
+  .brand-avatar-box {
+    width: 32px;
+    height: 32px;
+  }
+
+  .brand-name {
+    font-size: 0.85rem;
+  }
+
+  .brand-subtitle {
+    display: none;
+  }
+
+  .admin-nav-actions .glass-pill-btn.mini-btn {
+    padding: 5px 10px;
+    font-size: 0.74rem;
+  }
+
+  .admin-nav-actions .logout-text {
+    display: none;
+  }
+
   .login-glass-card {
     padding: 32px 20px;
   }

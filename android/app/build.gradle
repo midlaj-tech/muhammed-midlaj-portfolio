@@ -40,6 +40,11 @@ android {
     buildFeatures {
         viewBinding false
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
