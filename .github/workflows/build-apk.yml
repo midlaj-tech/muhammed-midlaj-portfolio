@@ -58,16 +58,17 @@ jobs:
           cd android
           ./gradlew assembleRelease --stacktrace
 
-      - name: Rename APK for Pixel 8
+      - name: Package Universal & Device APKs
         run: |
           mkdir -p dist-apk
+          cp android/app/build/outputs/apk/release/app-release.apk dist-apk/AdminStudio-Android.apk
           cp android/app/build/outputs/apk/release/app-release.apk dist-apk/AdminStudio-Pixel8.apk
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AdminStudio-Pixel8-APK
-          path: dist-apk/AdminStudio-Pixel8.apk
+          name: AdminStudio-Android-APK
+          path: dist-apk/*.apk
           retention-days: 30
 
       - name: Release APK
@@ -75,19 +76,22 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           tag_name: v1.0.0-apk
-          name: "📱 Admin Studio for Google Pixel 8"
+          name: "📱 Admin Studio for Android (Universal APK)"
           body: |
-            ### 📱 Admin Studio Android APK (Google Pixel 8)
+            ### 📱 Admin Studio for Android (Universal APK)
             
-            - **Native Biometrics**: Google Pixel 8 Fingerprint and Face Unlock via Android `BiometricPrompt`.
-            - **Zero Passcode Typing**: Directly authenticates your master admin session using your device biometric.
-            - **Complete Admin Control**: Manage Skills, Projects, Blogs, Now Engineering, Direct Messages, and Telemetry.
-            - **Offline & Live**: Works offline with built-in assets and supports file uploads for resume/avatar.
+            - **Universal Android Compatibility**: Optimized for all modern Android devices (Google Pixel, Samsung Galaxy, OnePlus, Xiaomi, Nothing, etc.).
+            - **Native Device Biometrics**: Single-line authentication status with universal verified checkmark (`✓`).
+            - **First-Time Setup Flow**: On first launch, log in using your admin credentials, then opt-in to device biometrics for future unlocks.
+            - **Real-Time Cross-Device Sync**: Immediate cloud synchronization of link clicks, direct messages, and telemetry across Mac and mobile.
+            - **Complete Admin Studio Controls**: Manage Skills, Projects, Blogs, Now Engineering, Direct Messages, and Telemetry.
             
-            #### 📥 Installation on Pixel 8:
-            1. Download **`AdminStudio-Pixel8.apk`** below on your phone.
-            2. Open the downloaded file and tap **Install**.
-            3. Touch the fingerprint sensor to unlock!
-          files: dist-apk/AdminStudio-Pixel8.apk
+            #### 📥 Download & Installation:
+            1. Download **`AdminStudio-Android.apk`** below directly to your device.
+            2. Open the downloaded file and select **Install**.
+            3. Sign in with your master credentials and enable Biometrics when prompted!
+          files: |
+            dist-apk/AdminStudio-Android.apk
+            dist-apk/AdminStudio-Pixel8.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
