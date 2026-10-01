@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initAmbientMeshCanvas();
   initScrollNavBehavior();
   initHeroAvatarScrollAnimation();
-  initAppleMiniPopup();
   initSkillsSegmentedControl();
   initProjectsFilter();
   initBlogFilter();
@@ -278,68 +277,10 @@ function initHeroAvatarScrollAnimation() {
 }
 
 /* ==========================================================================
-   4. GLOBAL APPLE LIQUID GLASS MINI HOVER POPUP
+   4. TOOLTIP POPUP REMOVED — REPLACED WITH SMOOTH APPLE LIQUID HOVER ZOOM
    ========================================================================== */
 function initAppleMiniPopup() {
-  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    return;
-  }
-
-  const popup = document.getElementById('apple-mini-popup');
-  const popupText = document.getElementById('popup-text');
-  const popupIcon = document.getElementById('popup-icon');
-  if (!popup || !popupText || !popupIcon) return;
-
-  let currentTarget = null;
-  let mouseX = 0;
-  let mouseY = 0;
-
-  function updatePopupPosition() {
-    if (!popup.classList.contains('is-visible')) return;
-
-    const popupWidth = popup.offsetWidth;
-    const popupHeight = popup.offsetHeight;
-    let left = mouseX - popupWidth / 2;
-    let top = mouseY - popupHeight - 14;
-
-    if (left < 10) left = 10;
-    if (left + popupWidth > window.innerWidth - 10) left = window.innerWidth - popupWidth - 10;
-    if (top < 10) top = mouseY + 20;
-
-    popup.style.left = `${left}px`;
-    popup.style.top = `${top}px`;
-  }
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-    if (currentTarget) {
-      updatePopupPosition();
-    }
-  }, { passive: true });
-
-  document.addEventListener('mouseover', (e) => {
-    const target = e.target.closest('[data-tooltip]');
-    if (target) {
-      currentTarget = target;
-      const tooltip = target.getAttribute('data-tooltip');
-      const icon = target.getAttribute('data-icon') || '↗';
-
-      popupText.textContent = tooltip;
-      popupIcon.textContent = icon;
-      popup.classList.add('is-visible');
-      updatePopupPosition();
-    }
-  });
-
-  document.addEventListener('mouseout', (e) => {
-    const target = e.target.closest('[data-tooltip]');
-    if (target && target === currentTarget) {
-      currentTarget = null;
-      popup.classList.remove('is-visible');
-    }
-  });
+  // Permanently disabled per design rework: hover tooltips removed site-wide in favor of fluid spring zooming
 }
 
 /* ==========================================================================
@@ -538,8 +479,25 @@ function initExpandToggles() {
 }
 
 /* ==========================================================================
-   7. LIQUID GLASS MODAL SHEETS
+   7. LIQUID GLASS MODAL SHEETS & OFFICIAL RESUME DOWNLOAD
    ========================================================================== */
+export function downloadOfficialResume() {
+  dataStore.trackClick('resume');
+  const profile = dataStore.getProfile();
+  const fileUrl = (profile && profile.resumeUrl) ? profile.resumeUrl : '/Muhammed_Midlaj_iOS_Resume.pdf';
+  const fileName = (profile && profile.resumeFileName) ? profile.resumeFileName : 'Muhammed_Midlaj_iOS_Resume.pdf';
+
+  const link = document.createElement('a');
+  link.href = fileUrl;
+  link.setAttribute('download', fileName);
+  link.setAttribute('target', '_blank');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  showToast('Downloading Official CV (PDF)...', '✓');
+}
+window.downloadOfficialResume = downloadOfficialResume;
+
 function initModalSheets() {
   const backdrop = document.getElementById('modal-backdrop');
   if (!backdrop) return;
@@ -608,7 +566,18 @@ function initModalSheets() {
 
   const resumeDownloadBtn = document.getElementById('resume-download-btn');
   if (resumeDownloadBtn) {
-    resumeDownloadBtn.addEventListener('click', () => openModal('modal-resume'));
+    resumeDownloadBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadOfficialResume();
+    });
+  }
+
+  const modalDownloadResumeBtn = document.getElementById('modal-download-resume-btn');
+  if (modalDownloadResumeBtn) {
+    modalDownloadResumeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadOfficialResume();
+    });
   }
 
   const heroResumeTrigger = document.getElementById('hero-resume-trigger');
@@ -773,21 +742,11 @@ function initContactForm() {
     // Persist sanitized message in dataStore for Admin Studio Direct Messages Hub
     dataStore.addMessage({ name, email, subject, message });
 
-    // Use configured recipient email or default to portfolio owner's address
-    const recipientEmail = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_CONTACT_EMAIL)
-      ? import.meta.env.VITE_CONTACT_EMAIL
-      : 'disney.mio@icloud.com';
-
-    const mailtoUrl = `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(`[Portfolio] ${subject} - from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-
     if (successBanner) {
       successBanner.classList.add('is-visible');
     }
-    showToast('Direct message logged & opening Mail...', '✓');
-
-    setTimeout(() => {
-      window.location.href = mailtoUrl;
-    }, 500);
+    form.reset();
+    showToast('Direct message sent to Midlaj!', '✓');
   });
 }
 
@@ -1017,30 +976,7 @@ function initDataSyncWithStore() {
    14. TELEMETRY & CLICK ANALYTICS TRACKING
    ========================================================================== */
 function initAnalyticsTracking() {
-  // 1. Resume Download Clicks
-  const resumeDownloadBtn = document.getElementById('resume-download-btn');
-  const heroResumeTrigger = document.getElementById('hero-resume-trigger');
-
-  function handleResumeClick(e) {
-    dataStore.trackClick('resume');
-    const profile = dataStore.getProfile();
-    if (profile && profile.resumeUrl) {
-      // If a custom resume was uploaded by admin, trigger that download
-      e.preventDefault();
-      e.stopPropagation();
-      const a = document.createElement('a');
-      a.href = profile.resumeUrl;
-      a.download = profile.resumeFileName || 'Muhammed_Midlaj_iOS_Resume.pdf';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      showToast('Downloading updated CV...');
-    }
-  }
-
-  if (resumeDownloadBtn) {
-    resumeDownloadBtn.addEventListener('click', handleResumeClick);
-  }
+  // 1. Resume Download Clicks & Direct Downloader
   if (heroResumeTrigger) {
     heroResumeTrigger.addEventListener('click', () => dataStore.trackClick('resume'));
   }

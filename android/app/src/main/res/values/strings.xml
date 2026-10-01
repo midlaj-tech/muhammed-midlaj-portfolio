@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Admin Studio</string>
-    <string name="biometric_title">Admin Studio • Pixel 8</string>
-    <string name="biometric_subtitle">Biometric Device Authentication</string>
+    <string name="biometric_title">Admin Studio</string>
+    <string name="biometric_subtitle">Device Biometric Authentication</string>
     <string name="biometric_description">Touch the fingerprint sensor or look at your screen to unlock.</string>
+    <string name="biometric_opt_in_title">Enable Biometric Login?</string>
+    <string name="biometric_opt_in_message">Would you like to unlock Admin Studio with your device biometrics (fingerprint or face) next time?</string>
+    <string name="enable_biometrics">Enable Biometrics</string>
+    <string name="use_password_only">Use Password Only</string>
 </resources>

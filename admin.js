@@ -252,6 +252,14 @@ function initAuthFlow() {
         loginView.style.display = 'none';
         workspaceView.style.display = 'block';
         updateAllAdminViews();
+
+        if (window.AndroidBridge && typeof window.AndroidBridge.onWebLoginSuccess === 'function') {
+          try {
+            window.AndroidBridge.onWebLoginSuccess();
+          } catch (err) {
+            console.warn('AndroidBridge.onWebLoginSuccess error:', err);
+          }
+        }
       } else {
         const attempts = parseInt(sessionStorage.getItem('admin_failed_attempts') || '0', 10) + 1;
         sessionStorage.setItem('admin_failed_attempts', attempts.toString());

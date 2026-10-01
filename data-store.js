@@ -25,6 +25,10 @@ try {
   console.warn('BroadcastChannel not available:', e);
 }
 
+// Global Cloud Sync Endpoint for Instant Cross-Device Sync (Mac <-> Android / Pixel)
+const CLOUD_SYNC_ENDPOINT = 'https://api.restful-api.dev/objects/ff808181a09d98f701a0f8663a845a52';
+const CLOUD_OBJECT_NAME = 'midlaj_portfolio_cloud_sync_prod';
+
 // Web Crypto SHA-256 helper for zero plaintext credential exposure
 export async function computeSha256(message) {
   if (typeof crypto !== 'undefined' && crypto.subtle) {
@@ -375,7 +379,11 @@ const DEFAULT_BLOGS = [
 
 class PortfolioDataStore {
   constructor() {
+    this.syncListeners = [];
+    this.isSyncing = false;
+    this.cloudDebounceTimer = null;
     this.init();
+    this.startCloudPolling();
   }
 
   init() {
@@ -556,9 +564,24 @@ class PortfolioDataStore {
         console.warn('Broadcast failed:', e);
       }
     }
+    this.notifySyncCallbacks(key, data);
+  }
+
+  notifySyncCallbacks(key, data) {
+    const payload = { key, data, timestamp: Date.now() };
+    this.syncListeners.forEach(cb => {
+      try {
+        cb(payload);
+      } catch (err) {
+        console.warn('Sync listener error:', err);
+      }
+    });
   }
 
   onSync(callback) {
+    if (typeof callback === 'function') {
+      this.syncListeners.push(callback);
+    }
     if (broadcastChannel) {
       broadcastChannel.addEventListener('message', (event) => {
         callback(event.data);
@@ -569,6 +592,153 @@ class PortfolioDataStore {
         callback({ key: event.key, data: JSON.parse(event.newValue), timestamp: Date.now() });
       } catch (e) {}
     });
+  }
+
+  // --- CLOUD REAL-TIME SYNCHRONIZATION (CROSS-DEVICE: MAC <-> PIXEL) ---
+  startCloudPolling() {
+    // Initial sync immediately upon script boot
+    this.fetchCloudSync();
+
+    if (typeof window !== 'undefined') {
+      // Active background polling every 3.5 seconds
+      setInterval(() => {
+        if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+          this.fetchCloudSync();
+        }
+      }, 3500);
+
+      // Instant sync whenever user switches to tab, focuses window, or reconnects
+      if (typeof document !== 'undefined') {
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') {
+            this.fetchCloudSync();
+          }
+        });
+      }
+      window.addEventListener('focus', () => {
+        this.fetchCloudSync();
+      });
+      window.addEventListener('online', () => {
+        this.fetchCloudSync();
+      });
+    }
+  }
+
+  async fetchCloudSync() {
+    if (this.isSyncing) return;
+    try {
+      const res = await fetch(CLOUD_SYNC_ENDPOINT, {
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        cache: 'no-store'
+      });
+      if (!res.ok) return;
+      const json = await res.json();
+      if (!json || !json.data) return;
+
+      const cloudData = json.data;
+      let needPush = false;
+
+      // 1. Process Metrics
+      if (cloudData.metrics) {
+        const localMetrics = this.getMetrics();
+        const localResetTs = localMetrics.resetTimestamp || 0;
+        const cloudResetTs = cloudData.metrics.resetTimestamp || 0;
+
+        if (cloudResetTs > localResetTs) {
+          // Cloud has a newer reset command from admin studio
+          localStorage.setItem(STORAGE_KEYS.METRICS, JSON.stringify(cloudData.metrics));
+          this.broadcast(STORAGE_KEYS.METRICS, cloudData.metrics);
+        } else if (localResetTs > cloudResetTs) {
+          // Local has a newer reset command, will propagate to cloud
+          needPush = true;
+        } else {
+          // Merge clicks: take maximum count so clicks from any device are never lost
+          const keys = ['resumeClicks', 'githubClicks', 'linkedinClicks', 'mailClicks', 'phoneClicks', 'whatsappClicks'];
+          let metricsChanged = false;
+          const merged = { ...localMetrics };
+
+          keys.forEach(k => {
+            const cVal = typeof cloudData.metrics[k] === 'number' ? cloudData.metrics[k] : 0;
+            const lVal = typeof localMetrics[k] === 'number' ? localMetrics[k] : 0;
+            if (cVal > lVal) {
+              merged[k] = cVal;
+              metricsChanged = true;
+            } else if (lVal > cVal) {
+              needPush = true;
+            }
+          });
+
+          if (metricsChanged) {
+            merged.dailyHistory = cloudData.metrics.dailyHistory || localMetrics.dailyHistory;
+            localStorage.setItem(STORAGE_KEYS.METRICS, JSON.stringify(merged));
+            this.broadcast(STORAGE_KEYS.METRICS, merged);
+          }
+        }
+      }
+
+      // 2. Process Direct Messages
+      if (Array.isArray(cloudData.messages)) {
+        const localMessages = this.getMessages();
+        const localMap = new Map(localMessages.map(m => [m.id, m]));
+        let messagesChanged = false;
+
+        cloudData.messages.forEach(cMsg => {
+          if (!localMap.has(cMsg.id)) {
+            localMap.set(cMsg.id, cMsg);
+            messagesChanged = true;
+          }
+        });
+
+        const cloudIds = new Set(cloudData.messages.map(m => m.id));
+        if (localMessages.some(m => !cloudIds.has(m.id))) {
+          needPush = true;
+        }
+
+        if (messagesChanged) {
+          const mergedList = Array.from(localMap.values());
+          mergedList.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+          if (mergedList.length > 100) mergedList.length = 100;
+          localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(mergedList));
+          this.broadcast(STORAGE_KEYS.MESSAGES, mergedList);
+        }
+      }
+
+      if (needPush) {
+        this.pushCloudSync();
+      }
+    } catch (e) {
+      // Offline fallback
+    }
+  }
+
+  async pushCloudSync() {
+    clearTimeout(this.cloudDebounceTimer);
+    this.cloudDebounceTimer = setTimeout(async () => {
+      try {
+        this.isSyncing = true;
+        const payload = {
+          name: CLOUD_OBJECT_NAME,
+          data: {
+            metrics: this.getMetrics(),
+            messages: this.getMessages(),
+            updatedAt: Date.now()
+          }
+        };
+        await fetch(CLOUD_SYNC_ENDPOINT, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (e) {
+        // Offline resilience
+      } finally {
+        this.isSyncing = false;
+      }
+    }, 150);
   }
 
   // --- AUTHENTICATION (Hashed & Session Inactivity Timeout) ---
@@ -655,6 +825,7 @@ class PortfolioDataStore {
       mailClicks: 0,
       phoneClicks: 0,
       whatsappClicks: 0,
+      resetTimestamp: Date.now(),
       dailyHistory: [
         { date: 'Mon', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
         { date: 'Tue', resume: 0, github: 0, linkedin: 0, mail: 0, phone: 0, whatsapp: 0 },
@@ -666,6 +837,7 @@ class PortfolioDataStore {
       ]
     };
     this.setItem(STORAGE_KEYS.METRICS, emptyMetrics);
+    this.pushCloudSync();
     return emptyMetrics;
   }
 
@@ -692,6 +864,7 @@ class PortfolioDataStore {
         }
       }
       this.setItem(STORAGE_KEYS.METRICS, metrics);
+      this.pushCloudSync();
     }
   }
 
@@ -720,6 +893,7 @@ class PortfolioDataStore {
     // Limit stored messages to 100 entries to prevent storage exhaustion
     if (messages.length > 100) messages.length = 100;
     this.setItem(STORAGE_KEYS.MESSAGES, messages);
+    this.pushCloudSync();
     return newMsg;
   }
 
@@ -729,6 +903,7 @@ class PortfolioDataStore {
     if (msg) {
       msg.isRead = !msg.isRead;
       this.setItem(STORAGE_KEYS.MESSAGES, messages);
+      this.pushCloudSync();
     }
   }
 
@@ -736,6 +911,7 @@ class PortfolioDataStore {
     let messages = this.getMessages();
     messages = messages.filter(m => m.id !== id);
     this.setItem(STORAGE_KEYS.MESSAGES, messages);
+    this.pushCloudSync();
   }
 
   // --- PROFILE (Photo, Resume) ---

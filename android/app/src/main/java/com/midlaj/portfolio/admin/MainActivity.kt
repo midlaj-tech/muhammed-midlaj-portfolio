@@ -12,6 +12,7 @@ import android.webkit.*
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private lateinit var lockOverlay: ConstraintLayout
     private lateinit var unlockButton: Button
+    private lateinit var usePasswordButton: Button
 
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
@@ -40,6 +42,9 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val LIVE_URL = "https://muhammed-midlaj-portfolio.vercel.app/admin.html"
         private const val LOCAL_URL = "https://appassets.androidplatform.net/admin.html"
+        private const val PREFS_NAME = "midlaj_portfolio_prefs"
+        private const val KEY_BIOMETRIC_OPT_IN_SHOWN = "biometric_opt_in_shown"
+        private const val KEY_BIOMETRIC_ENABLED = "biometric_enabled"
     }
 
     private val fileChooserLauncher = registerForActivityResult(
@@ -62,7 +67,16 @@ class MainActivity : AppCompatActivity() {
         setupAssetLoader()
         setupViews()
         setupBiometrics()
-        authenticateWithBiometrics()
+
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val isBiometricEnabled = prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)
+
+        if (isBiometricEnabled) {
+            lockOverlay.visibility = View.VISIBLE
+            authenticateWithBiometrics()
+        } else {
+            lockOverlay.visibility = View.GONE
+        }
     }
 
     private fun setupAssetLoader() {
@@ -77,6 +91,7 @@ class MainActivity : AppCompatActivity() {
         swipeRefresh = findViewById(R.id.swipeRefresh)
         lockOverlay = findViewById(R.id.lockOverlay)
         unlockButton = findViewById(R.id.unlockButton)
+        usePasswordButton = findViewById(R.id.usePasswordButton)
 
         swipeRefresh.setOnRefreshListener {
             webView.reload()
@@ -85,6 +100,10 @@ class MainActivity : AppCompatActivity() {
 
         unlockButton.setOnClickListener {
             authenticateWithBiometrics()
+        }
+
+        usePasswordButton.setOnClickListener {
+            lockOverlay.visibility = View.GONE
         }
 
         configureWebView()
@@ -206,7 +225,8 @@ class MainActivity : AppCompatActivity() {
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-                    if (!isAuthenticated) {
+                    val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                    if (!isAuthenticated && prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)) {
                         lockOverlay.visibility = View.VISIBLE
                     }
                 }
@@ -215,13 +235,13 @@ class MainActivity : AppCompatActivity() {
                     super.onAuthenticationSucceeded(result)
                     isAuthenticated = true
                     lockOverlay.visibility = View.GONE
-                    Toast.makeText(applicationContext, "✓ Pixel 8 Verified. Welcome Midlaj!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "✓ Biometrics Verified", Toast.LENGTH_SHORT).show()
                     injectAuthenticatedSession()
                 }
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
-                    Toast.makeText(applicationContext, "Fingerprint not recognized. Try again.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Biometrics not recognized", Toast.LENGTH_SHORT).show()
                 }
             })
 
@@ -274,9 +294,9 @@ class MainActivity : AppCompatActivity() {
                         updateAllAdminViews();
                     }
                     if (typeof window.showToast === 'function') {
-                        window.showToast('Pixel 8 Biometric Verified • Welcome Midlaj!', '');
+                        window.showToast('Biometrics Verified', '✓');
                     } else if (typeof showToast === 'function') {
-                        showToast('Pixel 8 Biometric Verified • Welcome Midlaj!', '');
+                        showToast('Biometrics Verified', '✓');
                     }
                 } catch(e) {
                     console.error('Biometric session injection error: ' + (e && e.name) + ' - ' + (e && e.message) + ' stack: ' + (e && e.stack));
@@ -314,6 +334,35 @@ class MainActivity : AppCompatActivity() {
             val biometricManager = BiometricManager.from(this@MainActivity)
             val authenticators = BiometricManager.Authenticators.BIOMETRIC_STRONG or BiometricManager.Authenticators.DEVICE_CREDENTIAL
             return biometricManager.canAuthenticate(authenticators) == BiometricManager.BIOMETRIC_SUCCESS
+        }
+
+        @JavascriptInterface
+        fun onWebLoginSuccess() {
+            runOnUiThread {
+                val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                val optInShown = prefs.getBoolean(KEY_BIOMETRIC_OPT_IN_SHOWN, false)
+                if (!optInShown && isBiometricAvailable()) {
+                    AlertDialog.Builder(this@MainActivity)
+                        .setTitle(R.string.biometric_opt_in_title)
+                        .setMessage(R.string.biometric_opt_in_message)
+                        .setPositiveButton(R.string.enable_biometrics) { _, _ ->
+                            prefs.edit()
+                                .putBoolean(KEY_BIOMETRIC_OPT_IN_SHOWN, true)
+                                .putBoolean(KEY_BIOMETRIC_ENABLED, true)
+                                .apply()
+                            Toast.makeText(this@MainActivity, "Biometric login enabled", Toast.LENGTH_SHORT).show()
+                        }
+                        .setNegativeButton(R.string.use_password_only) { _, _ ->
+                            prefs.edit()
+                                .putBoolean(KEY_BIOMETRIC_OPT_IN_SHOWN, true)
+                                .putBoolean(KEY_BIOMETRIC_ENABLED, false)
+                                .apply()
+                            Toast.makeText(this@MainActivity, "Password login active", Toast.LENGTH_SHORT).show()
+                        }
+                        .setCancelable(false)
+                        .show()
+                }
+            }
         }
 
         @JavascriptInterface
