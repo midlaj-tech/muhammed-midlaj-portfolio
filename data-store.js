@@ -25,8 +25,10 @@ try {
   console.warn('BroadcastChannel not available:', e);
 }
 
-// Global Cloud Sync Endpoint for Instant Cross-Device Sync (Mac <-> Android / Pixel)
-const CLOUD_SYNC_ENDPOINT = 'https://api.restful-api.dev/objects/ff808181a09d98f701a0f8663a845a52';
+// High-Reliability Cross-Device Cloud Sync Endpoint (Mac <-> Android Phone <-> Any Device)
+const CLOUD_SYNC_ENDPOINT = (typeof window !== 'undefined' && window.location.origin.includes('vercel.app'))
+  ? '/api/sync'
+  : 'https://muhammed-midlaj-portfolio.vercel.app/api/sync';
 const CLOUD_OBJECT_NAME = 'midlaj_portfolio_cloud_sync_prod';
 
 // Web Crypto SHA-256 helper for zero plaintext credential exposure
@@ -650,7 +652,7 @@ class PortfolioDataStore {
           localStorage.setItem(STORAGE_KEYS.METRICS, JSON.stringify(cloudData.metrics));
           this.broadcast(STORAGE_KEYS.METRICS, cloudData.metrics);
         } else if (localResetTs > cloudResetTs) {
-          // Local has a newer reset command, will propagate to cloud
+          // Local has a newer reset command, propagate to cloud
           needPush = true;
         } else {
           // Merge clicks: take maximum count so clicks from any device are immediately reflected
@@ -676,34 +678,31 @@ class PortfolioDataStore {
           }
         }
       } else {
-        // Cloud has no metrics yet, push our current metrics to seed cloud
         needPush = true;
       }
 
-      // 2. Process Direct Messages
+      // 2. Process Direct Messages (Master cross-device sync)
       if (Array.isArray(cloudData.messages)) {
         const localMessages = this.getMessages();
         const localMap = new Map(localMessages.map(m => [m.id, m]));
         let messagesChanged = false;
 
-        cloudData.messages.forEach(cMsg => {
-          if (!localMap.has(cMsg.id)) {
-            localMap.set(cMsg.id, cMsg);
-            messagesChanged = true;
+        if (localMessages.length !== cloudData.messages.length) {
+          messagesChanged = true;
+        } else {
+          for (let i = 0; i < cloudData.messages.length; i++) {
+            const cm = cloudData.messages[i];
+            const lm = localMap.get(cm.id);
+            if (!lm || lm.isRead !== cm.isRead) {
+              messagesChanged = true;
+              break;
+            }
           }
-        });
-
-        const cloudIds = new Set(cloudData.messages.map(m => m.id));
-        if (localMessages.some(m => !cloudIds.has(m.id))) {
-          needPush = true;
         }
 
         if (messagesChanged) {
-          const mergedList = Array.from(localMap.values());
-          mergedList.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
-          if (mergedList.length > 100) mergedList.length = 100;
-          localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(mergedList));
-          this.broadcast(STORAGE_KEYS.MESSAGES, mergedList);
+          localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(cloudData.messages));
+          this.broadcast(STORAGE_KEYS.MESSAGES, cloudData.messages);
         }
       } else {
         needPush = true;
@@ -717,7 +716,7 @@ class PortfolioDataStore {
     }
   }
 
-  async pushCloudSync(immediate = false) {
+  async pushCloudSync(immediate = false, meta = {}) {
     const doPush = async () => {
       try {
         this.isSyncing = true;
@@ -726,17 +725,17 @@ class PortfolioDataStore {
           data: {
             metrics: this.getMetrics(),
             messages: this.getMessages(),
-            updatedAt: Date.now()
+            updatedAt: Date.now(),
+            ...meta
           }
         };
         await fetch(CLOUD_SYNC_ENDPOINT, {
-          method: 'PUT',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify(payload),
-          keepalive: true
+          body: JSON.stringify(payload)
         });
       } catch (e) {
         // Offline resilience
@@ -924,7 +923,7 @@ class PortfolioDataStore {
     let messages = this.getMessages();
     messages = messages.filter(m => m.id !== id);
     this.setItem(STORAGE_KEYS.MESSAGES, messages);
-    this.pushCloudSync(true);
+    this.pushCloudSync(true, { action: 'delete_message', deletedId: id });
   }
 
   // --- PROFILE (Photo, Resume) ---

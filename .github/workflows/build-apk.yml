@@ -12,6 +12,7 @@ on:
       - 'script.js'
       - 'styles.css'
       - 'data-store.js'
+      - 'api/**'
       - 'public/**'
   workflow_dispatch:
 
