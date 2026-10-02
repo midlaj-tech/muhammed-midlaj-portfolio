@@ -11,6 +11,7 @@ import android.view.View
 import android.webkit.*
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -67,10 +68,12 @@ class MainActivity : AppCompatActivity() {
         setupAssetLoader()
         setupViews()
         setupBiometrics()
+        setupBackNavigation()
 
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val isBiometricEnabled = prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)
 
+        isAuthenticated = false
         if (isBiometricEnabled) {
             lockOverlay.visibility = View.VISIBLE
             authenticateWithBiometrics()
@@ -108,10 +111,48 @@ class MainActivity : AppCompatActivity() {
         }
 
         usePasswordButton.setOnClickListener {
+            isAuthenticated = false
             lockOverlay.visibility = View.GONE
+            clearWebSession()
         }
 
         configureWebView()
+    }
+
+    private fun setupBackNavigation() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                val isBiometricEnabled = prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)
+
+                // 1. If currently on lock overlay, back press exits the application safely
+                if (lockOverlay.visibility == View.VISIBLE) {
+                    finish()
+                    return
+                }
+
+                // 2. If NOT authenticated (e.g. user clicked "Log in with Password" and is on login screen)
+                if (!isAuthenticated) {
+                    if (isBiometricEnabled) {
+                        // Return user back to the Biometric Lock Overlay
+                        clearWebSession()
+                        lockOverlay.visibility = View.VISIBLE
+                        authenticateWithBiometrics()
+                    } else {
+                        // Biometrics not enabled: exit the app
+                        finish()
+                    }
+                    return
+                }
+
+                // 3. If authenticated in admin workspace:
+                if (webView.canGoBack()) {
+                    webView.goBack()
+                } else {
+                    finish()
+                }
+            }
+        })
     }
 
     private fun isNetworkConnected(): Boolean {
@@ -157,6 +198,8 @@ class MainActivity : AppCompatActivity() {
                 super.onPageFinished(view, url)
                 if (isAuthenticated) {
                     injectAuthenticatedSession()
+                } else {
+                    clearWebSession()
                 }
             }
 
@@ -231,9 +274,13 @@ class MainActivity : AppCompatActivity() {
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
+                    isAuthenticated = false
                     val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-                    if (!isAuthenticated && prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)) {
+                    if (prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)) {
                         lockOverlay.visibility = View.VISIBLE
+                    } else {
+                        lockOverlay.visibility = View.GONE
+                        clearWebSession()
                     }
                 }
 
@@ -247,6 +294,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
+                    isAuthenticated = false
                     Toast.makeText(applicationContext, "Biometrics not recognized", Toast.LENGTH_SHORT).show()
                 }
             })
@@ -268,12 +316,29 @@ class MainActivity : AppCompatActivity() {
                 biometricPrompt.authenticate(promptInfo)
             }
             else -> {
-                // If biometrics not configured on device, allow access through device credentials
+                // If biometrics not configured or supported, force master password authentication
+                isAuthenticated = false
                 lockOverlay.visibility = View.GONE
-                isAuthenticated = true
-                injectAuthenticatedSession()
+                clearWebSession()
             }
         }
+    }
+
+    private fun clearWebSession() {
+        val script = """
+            (function() {
+                try {
+                    sessionStorage.removeItem('midlaj_portfolio_session');
+                    const loginView = document.getElementById('login-view');
+                    const workspace = document.getElementById('admin-workspace');
+                    if (loginView) loginView.style.display = 'flex';
+                    if (workspace) workspace.style.display = 'none';
+                    const pwdInput = document.getElementById('login-password');
+                    if (pwdInput) pwdInput.value = '';
+                } catch(e) {}
+            })();
+        """.trimIndent()
+        webView.evaluateJavascript(script, null)
     }
 
     private fun injectAuthenticatedSession() {
@@ -315,10 +380,16 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         // Auto-lock if backgrounded for more than 5 minutes
+        val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val isBiometricEnabled = prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)
+
         if (isAuthenticated && lastPauseTime > 0 && System.currentTimeMillis() - lastPauseTime > 5 * 60 * 1000) {
             isAuthenticated = false
-            lockOverlay.visibility = View.VISIBLE
-            authenticateWithBiometrics()
+            clearWebSession()
+            if (isBiometricEnabled) {
+                lockOverlay.visibility = View.VISIBLE
+                authenticateWithBiometrics()
+            }
         }
     }
 
@@ -345,6 +416,7 @@ class MainActivity : AppCompatActivity() {
         @JavascriptInterface
         fun onWebLoginSuccess() {
             runOnUiThread {
+                isAuthenticated = true
                 val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
                 val optInShown = prefs.getBoolean(KEY_BIOMETRIC_OPT_IN_SHOWN, false)
                 if (!optInShown && isBiometricAvailable()) {
@@ -373,7 +445,14 @@ class MainActivity : AppCompatActivity() {
 
         @JavascriptInterface
         fun onWebLogout() {
-            isAuthenticated = false
+            runOnUiThread {
+                isAuthenticated = false
+                clearWebSession()
+                val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                if (prefs.getBoolean(KEY_BIOMETRIC_ENABLED, false)) {
+                    lockOverlay.visibility = View.VISIBLE
+                }
+            }
         }
 
         @JavascriptInterface

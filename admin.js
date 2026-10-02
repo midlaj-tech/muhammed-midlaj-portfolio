@@ -181,45 +181,22 @@ function initAuthFlow() {
       pwdInput.focus();
     });
   }
-  // Biometric Unlock Trigger (Android Native Bridge + WebAuthn Passkeys)
+  // Biometric Unlock Trigger (STRICTLY for Android Native App via AndroidBridge, REMOVED for web login)
   const bioBtn = document.getElementById('biometric-login-btn');
   const isAndroidApp = typeof window.AndroidBridge !== 'undefined';
-  const hasWebAuthn = typeof window.PublicKeyCredential !== 'undefined';
 
-  if (bioBtn && (isAndroidApp || hasWebAuthn)) {
-    bioBtn.style.display = 'flex';
-    bioBtn.addEventListener('click', async () => {
-      if (isAndroidApp) {
-        window.AndroidBridge.requestBiometric();
-      } else {
-        try {
-          showToast('Touch sensor or use face unlock...', '👆');
-          const challenge = new Uint8Array(32);
-          window.crypto.getRandomValues(challenge);
-          
-          await navigator.credentials.get({
-            publicKey: {
-              challenge,
-              timeout: 60000,
-              userVerification: 'preferred',
-              allowCredentials: []
-            }
-          }).catch(() => null);
-
-          sessionStorage.setItem('midlaj_portfolio_session', JSON.stringify({
-            token: 'bio_web_' + Date.now(),
-            loginTime: Date.now(),
-            lastActive: Date.now()
-          }));
-          loginView.style.display = 'none';
-          workspaceView.style.display = 'block';
-          updateAllAdminViews();
-          showToast('Biometrics Verified', '✓');
-        } catch (err) {
-          showToast('Biometric check cancelled.', '✕');
+  if (bioBtn) {
+    if (isAndroidApp) {
+      bioBtn.style.display = 'flex';
+      bioBtn.addEventListener('click', () => {
+        if (window.AndroidBridge && typeof window.AndroidBridge.requestBiometric === 'function') {
+          window.AndroidBridge.requestBiometric();
         }
-      }
-    });
+      });
+    } else {
+      // Strictly remove biometric button from DOM for web login
+      bioBtn.remove();
+    }
   }
 
   // Native Android Biometric Unlock Event Listener
