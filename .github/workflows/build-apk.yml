@@ -9,6 +9,8 @@ on:
       - 'admin.html'
       - 'admin.js'
       - 'admin.css'
+      - 'script.js'
+      - 'styles.css'
       - 'data-store.js'
       - 'public/**'
   workflow_dispatch:

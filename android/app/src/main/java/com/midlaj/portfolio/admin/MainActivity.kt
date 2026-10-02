@@ -94,7 +94,12 @@ class MainActivity : AppCompatActivity() {
         usePasswordButton = findViewById(R.id.usePasswordButton)
 
         swipeRefresh.setOnRefreshListener {
-            webView.reload()
+            if (isNetworkConnected()) {
+                webView.clearCache(true)
+                webView.loadUrl("$LIVE_URL?v=${System.currentTimeMillis()}")
+            } else {
+                webView.reload()
+            }
             swipeRefresh.isRefreshing = false
         }
 
@@ -127,7 +132,7 @@ class MainActivity : AppCompatActivity() {
         settings.allowContentAccess = true
         settings.useWideViewPort = true
         settings.loadWithOverviewMode = true
-        settings.cacheMode = WebSettings.LOAD_DEFAULT
+        settings.cacheMode = if (isNetworkConnected()) WebSettings.LOAD_NO_CACHE else WebSettings.LOAD_DEFAULT
         settings.mixedContentMode = WebSettings.MIXED_CONTENT_NEVER_ALLOW
 
         CookieManager.getInstance().setAcceptCookie(true)
@@ -213,7 +218,8 @@ class MainActivity : AppCompatActivity() {
 
         // Load live Vercel admin if connected, else fallback to bundled offline assets
         if (isNetworkConnected()) {
-            webView.loadUrl(LIVE_URL)
+            webView.clearCache(true)
+            webView.loadUrl("$LIVE_URL?v=${System.currentTimeMillis()}")
         } else {
             webView.loadUrl(LOCAL_URL)
         }
@@ -275,7 +281,7 @@ class MainActivity : AppCompatActivity() {
             (function() {
                 try {
                     const session = {
-                        token: 'pixel8_bio_' + Date.now(),
+                        token: 'admin_bio_' + Date.now(),
                         loginTime: Date.now(),
                         lastActive: Date.now()
                     };
@@ -363,6 +369,11 @@ class MainActivity : AppCompatActivity() {
                         .show()
                 }
             }
+        }
+
+        @JavascriptInterface
+        fun onWebLogout() {
+            isAuthenticated = false
         }
 
         @JavascriptInterface

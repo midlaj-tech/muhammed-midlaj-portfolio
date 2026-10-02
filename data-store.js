@@ -594,23 +594,23 @@ class PortfolioDataStore {
     });
   }
 
-  // --- CLOUD REAL-TIME SYNCHRONIZATION (CROSS-DEVICE: MAC <-> PIXEL) ---
+  // --- CLOUD REAL-TIME SYNCHRONIZATION (CROSS-DEVICE: MAC <-> PIXEL <-> ALL ANDROID) ---
   startCloudPolling() {
     // Initial sync immediately upon script boot
     this.fetchCloudSync();
 
     if (typeof window !== 'undefined') {
-      // Active background polling every 3.5 seconds
+      // Active background polling every 2.0 seconds for instant sync
       setInterval(() => {
-        if (typeof document !== 'undefined' && document.visibilityState === 'visible') {
+        if (typeof document === 'undefined' || document.visibilityState !== 'hidden') {
           this.fetchCloudSync();
         }
-      }, 3500);
+      }, 2000);
 
       // Instant sync whenever user switches to tab, focuses window, or reconnects
       if (typeof document !== 'undefined') {
         document.addEventListener('visibilitychange', () => {
-          if (document.visibilityState === 'visible') {
+          if (document.visibilityState !== 'hidden') {
             this.fetchCloudSync();
           }
         });
@@ -653,7 +653,7 @@ class PortfolioDataStore {
           // Local has a newer reset command, will propagate to cloud
           needPush = true;
         } else {
-          // Merge clicks: take maximum count so clicks from any device are never lost
+          // Merge clicks: take maximum count so clicks from any device are immediately reflected
           const keys = ['resumeClicks', 'githubClicks', 'linkedinClicks', 'mailClicks', 'phoneClicks', 'whatsappClicks'];
           let metricsChanged = false;
           const merged = { ...localMetrics };
@@ -675,6 +675,9 @@ class PortfolioDataStore {
             this.broadcast(STORAGE_KEYS.METRICS, merged);
           }
         }
+      } else {
+        // Cloud has no metrics yet, push our current metrics to seed cloud
+        needPush = true;
       }
 
       // 2. Process Direct Messages
@@ -702,19 +705,20 @@ class PortfolioDataStore {
           localStorage.setItem(STORAGE_KEYS.MESSAGES, JSON.stringify(mergedList));
           this.broadcast(STORAGE_KEYS.MESSAGES, mergedList);
         }
+      } else {
+        needPush = true;
       }
 
       if (needPush) {
-        this.pushCloudSync();
+        this.pushCloudSync(false);
       }
     } catch (e) {
       // Offline fallback
     }
   }
 
-  async pushCloudSync() {
-    clearTimeout(this.cloudDebounceTimer);
-    this.cloudDebounceTimer = setTimeout(async () => {
+  async pushCloudSync(immediate = false) {
+    const doPush = async () => {
       try {
         this.isSyncing = true;
         const payload = {
@@ -731,14 +735,23 @@ class PortfolioDataStore {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          keepalive: true
         });
       } catch (e) {
         // Offline resilience
       } finally {
         this.isSyncing = false;
       }
-    }, 150);
+    };
+
+    if (immediate) {
+      clearTimeout(this.cloudDebounceTimer);
+      return doPush();
+    }
+
+    clearTimeout(this.cloudDebounceTimer);
+    this.cloudDebounceTimer = setTimeout(doPush, 100);
   }
 
   // --- AUTHENTICATION (Hashed & Session Inactivity Timeout) ---
@@ -837,7 +850,7 @@ class PortfolioDataStore {
       ]
     };
     this.setItem(STORAGE_KEYS.METRICS, emptyMetrics);
-    this.pushCloudSync();
+    this.pushCloudSync(true);
     return emptyMetrics;
   }
 
@@ -864,7 +877,7 @@ class PortfolioDataStore {
         }
       }
       this.setItem(STORAGE_KEYS.METRICS, metrics);
-      this.pushCloudSync();
+      this.pushCloudSync(true);
     }
   }
 
@@ -893,7 +906,7 @@ class PortfolioDataStore {
     // Limit stored messages to 100 entries to prevent storage exhaustion
     if (messages.length > 100) messages.length = 100;
     this.setItem(STORAGE_KEYS.MESSAGES, messages);
-    this.pushCloudSync();
+    this.pushCloudSync(true);
     return newMsg;
   }
 
@@ -903,7 +916,7 @@ class PortfolioDataStore {
     if (msg) {
       msg.isRead = !msg.isRead;
       this.setItem(STORAGE_KEYS.MESSAGES, messages);
-      this.pushCloudSync();
+      this.pushCloudSync(true);
     }
   }
 
@@ -911,7 +924,7 @@ class PortfolioDataStore {
     let messages = this.getMessages();
     messages = messages.filter(m => m.id !== id);
     this.setItem(STORAGE_KEYS.MESSAGES, messages);
-    this.pushCloudSync();
+    this.pushCloudSync(true);
   }
 
   // --- PROFILE (Photo, Resume) ---

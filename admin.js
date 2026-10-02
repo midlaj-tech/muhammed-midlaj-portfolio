@@ -193,7 +193,7 @@ function initAuthFlow() {
         window.AndroidBridge.requestBiometric();
       } else {
         try {
-          showToast('Touch the Pixel 8 fingerprint sensor...', '👆');
+          showToast('Touch sensor or use face unlock...', '👆');
           const challenge = new Uint8Array(32);
           window.crypto.getRandomValues(challenge);
           
@@ -214,7 +214,7 @@ function initAuthFlow() {
           loginView.style.display = 'none';
           workspaceView.style.display = 'block';
           updateAllAdminViews();
-          showToast('Fingerprint Verified. Welcome Midlaj!', '✓');
+          showToast('Biometrics Verified', '✓');
         } catch (err) {
           showToast('Biometric check cancelled.', '✕');
         }
@@ -229,7 +229,7 @@ function initAuthFlow() {
     loginView.style.display = 'none';
     workspaceView.style.display = 'block';
     updateAllAdminViews();
-    showToast('Pixel 8 Verified • Welcome Midlaj!', '');
+    showToast('Biometrics Verified', '✓');
   });
 
   // Submit Login with rate-limiting & hash authentication
@@ -283,6 +283,9 @@ function initAuthFlow() {
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
       dataStore.logout();
+      if (window.AndroidBridge && typeof window.AndroidBridge.onWebLogout === 'function') {
+        try { window.AndroidBridge.onWebLogout(); } catch (e) {}
+      }
       showToast('Signed out of Admin Studio');
       workspaceView.style.display = 'none';
       loginView.style.display = 'flex';
@@ -1736,6 +1739,9 @@ function updateAllAdminViews() {
   initMessagesHub();
   initSecurityAndProfile();
 }
+
+window.updateAllAdminViews = updateAllAdminViews;
+window.showToast = showToast;
 
 /* ==========================================================================
    MODAL CONFIRMATION DIALOG

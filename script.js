@@ -481,20 +481,34 @@ function initExpandToggles() {
 /* ==========================================================================
    7. LIQUID GLASS MODAL SHEETS & OFFICIAL RESUME DOWNLOAD
    ========================================================================== */
-export function downloadOfficialResume() {
+export async function downloadOfficialResume() {
   dataStore.trackClick('resume');
   const profile = dataStore.getProfile();
   const fileUrl = (profile && profile.resumeUrl) ? profile.resumeUrl : '/Muhammed_Midlaj_iOS_Resume.pdf';
   const fileName = (profile && profile.resumeFileName) ? profile.resumeFileName : 'Muhammed_Midlaj_iOS_Resume.pdf';
 
-  const link = document.createElement('a');
-  link.href = fileUrl;
-  link.setAttribute('download', fileName);
-  link.setAttribute('target', '_blank');
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-  showToast('Downloading Official CV (PDF)...', '✓');
+  try {
+    const res = await fetch(fileUrl);
+    if (!res.ok) throw new Error('File not accessible');
+    const blob = await res.blob();
+    const blobUrl = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(blobUrl);
+    showToast('Official Resume downloaded ✓', '✓');
+  } catch (err) {
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Official Resume downloaded ✓', '✓');
+  }
 }
 window.downloadOfficialResume = downloadOfficialResume;
 
@@ -582,7 +596,10 @@ function initModalSheets() {
 
   const heroResumeTrigger = document.getElementById('hero-resume-trigger');
   if (heroResumeTrigger) {
-    heroResumeTrigger.addEventListener('click', () => openModal('modal-resume'));
+    heroResumeTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadOfficialResume();
+    });
   }
 
   closeButtons.forEach((btn) => btn.addEventListener('click', closeModal));
@@ -976,10 +993,7 @@ function initDataSyncWithStore() {
    14. TELEMETRY & CLICK ANALYTICS TRACKING
    ========================================================================== */
 function initAnalyticsTracking() {
-  // 1. Resume Download Clicks & Direct Downloader
-  if (heroResumeTrigger) {
-    heroResumeTrigger.addEventListener('click', () => dataStore.trackClick('resume'));
-  }
+  // 1. Resume Download Clicks are handled directly inside downloadOfficialResume() to prevent duplicate counting
 
   // 2. GitHub Clicks
   document.querySelectorAll('a[href*="github.com"]').forEach(link => {
