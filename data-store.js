@@ -25,8 +25,13 @@ try {
   console.warn('BroadcastChannel not available:', e);
 }
 
-// High-Reliability Cross-Device Cloud Sync Endpoint (Mac <-> Android Phone <-> Any Device)
-const CLOUD_SYNC_ENDPOINT = (typeof window !== 'undefined' && window.location.origin.includes('vercel.app'))
+const isNativeOrLocal = typeof window !== 'undefined' && (
+  window.location.protocol === 'file:' ||
+  window.location.origin.includes('androidplatform.net') ||
+  window.location.hostname === 'localhost' ||
+  window.location.hostname === '127.0.0.1'
+);
+const CLOUD_SYNC_ENDPOINT = (typeof window !== 'undefined' && !isNativeOrLocal)
   ? '/api/sync'
   : 'https://muhammed-midlaj-portfolio.vercel.app/api/sync';
 const CLOUD_OBJECT_NAME = 'midlaj_portfolio_cloud_sync_prod';
