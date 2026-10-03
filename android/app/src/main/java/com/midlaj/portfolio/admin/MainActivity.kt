@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private var lastPauseTime: Long = 0
 
     companion object {
-        private const val LIVE_URL = "https://muhammed-midlaj-portfolio.vercel.app/admin.html"
+        private const val LIVE_URL = "https://www.midlaj.online/admin.html"
         private const val LOCAL_URL = "https://appassets.androidplatform.net/admin.html"
         private const val PREFS_NAME = "midlaj_portfolio_prefs"
         private const val KEY_BIOMETRIC_OPT_IN_SHOWN = "biometric_opt_in_shown"
@@ -209,7 +209,7 @@ class MainActivity : AppCompatActivity() {
                 error: WebResourceError?
             ) {
                 super.onReceivedError(view, request, error)
-                if (request?.isForMainFrame == true && request.url.host?.contains("vercel.app") == true) {
+                if (request?.isForMainFrame == true && (request.url.host?.contains("midlaj.online") == true || request.url.host?.contains("vercel.app") == true)) {
                     // Seamlessly fallback to offline local bundled asset
                     view?.loadUrl(LOCAL_URL)
                 }

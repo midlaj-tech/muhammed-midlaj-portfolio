@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.restful-api.dev https://muhammed-midlaj-portfolio.vercel.app https://appassets.androidplatform.net; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto: tel:;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.restful-api.dev https://www.midlaj.online https://midlaj.online https://muhammed-midlaj-portfolio.vercel.app https://appassets.androidplatform.net; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto: tel:;"
         },
         {
           "key": "X-Content-Type-Options",
