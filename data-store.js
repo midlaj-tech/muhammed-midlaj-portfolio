@@ -272,17 +272,17 @@ const DEFAULT_PROJECTS = [
     githubUrl: 'https://github.com/disneymio'
   },
   {
-    id: 'project-powerboat-app',
-    title: 'Powerboat Marines Mobile',
-    subtitle: 'Cross-Platform Fleet & Telemetry',
-    category: 'mobile web',
-    logoUrl: '/images/MMD.png',
-    coverUrl: '/images/powerboat-app.jpg',
-    desc: 'Full iOS and Android mobile conversion of powerboatmarines.com. Engineered with responsive liquid navigation, offline vessel spec caching, push notifications for service alerts, and live GPS telemetry feeds.',
-    tags: ['Mobile Web App', 'Offline Telemetry', 'REST APIs', 'UI/UX'],
-    modalId: 'modal-powerboat-app',
-    liveUrl: 'https://powerboatmarines.com',
-    githubUrl: 'https://github.com/disneymio'
+    id: 'project-mmd-one',
+    title: 'MMD One',
+    subtitle: 'Marine Workforce & Financial ERP Suite',
+    category: 'web mobile',
+    logoUrl: '/images/mmd-one-app-icon.png',
+    coverUrl: '/images/mmd-one.jpg',
+    desc: 'Comprehensive marine operations platform featuring SalaryBox-inspired attendance calendar, automated payroll engine, whole-INR cashflow ledger with dynamic Excel export, and native biometric iOS/Android clients.',
+    tags: ['Next.js 15', 'TypeScript', 'Biometric Mobile', 'SQLite', 'iOS / Android'],
+    modalId: 'modal-mmd-one',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/midlaj-tech/MMD-One'
   },
   {
     id: 'project-brewme',
@@ -478,12 +478,26 @@ class PortfolioDataStore {
       });
       const projTitleMigrations = {
         'Powerboat Marine Marketing': 'MMD Marketing App',
-        'Powerboat Booking App': 'Powerboat Marines Mobile',
+        'Powerboat Booking App': 'MMD One',
+        'Powerboat Marines Mobile': 'MMD One',
         'BrewMe Coffee': 'BREWME'
       };
       updatedProjects.forEach(p => {
         if (projTitleMigrations[p.title]) {
           p.title = projTitleMigrations[p.title];
+          modified = true;
+        }
+        if (p.id === 'project-powerboat-app' || p.id === 'project-mmd-one') {
+          p.id = 'project-mmd-one';
+          p.title = 'MMD One';
+          p.subtitle = 'Marine Workforce & Financial ERP Suite';
+          p.category = 'web mobile';
+          p.logoUrl = '/images/mmd-one-app-icon.png';
+          p.coverUrl = '/images/mmd-one.jpg';
+          p.desc = 'Comprehensive marine operations platform featuring SalaryBox-inspired attendance calendar, automated payroll engine, whole-INR cashflow ledger with dynamic Excel export, and native biometric iOS/Android clients.';
+          p.tags = ['Next.js 15', 'TypeScript', 'Biometric Mobile', 'SQLite', 'iOS / Android'];
+          p.modalId = 'modal-mmd-one';
+          p.githubUrl = 'https://github.com/midlaj-tech/MMD-One';
           modified = true;
         }
         if (p.id === 'project-brewme') {
