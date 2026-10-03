@@ -314,6 +314,25 @@ const DEFAULT_PROJECTS = [
 
 const DEFAULT_BLOGS = [
   {
+    id: 'blog-6',
+    title: 'Apple Launches iPhone Duo Developer Kit: Dual-Screen SDK, Hinge Sensors & Xcode Simulator',
+    tags: ['#TechNews', '#iPhoneDuo', '#AppleDevKit', '#SwiftUI', '#Xcode'],
+    coverUrl: '/images/iphone-duo-dev.jpg',
+    readTime: '5 min read',
+    date: 'Oct 2026',
+    author: 'Muhammed Midlaj K',
+    modalId: 'modal-blog-iphone-duo',
+    excerpt: 'Apple has officially opened developer transition kit applications for the anticipated iPhone Duo, introducing dual-viewport SwiftUI posture APIs, mechanical hinge angle sensors, and an all-new Xcode Dual-Display Simulator.',
+    content: `<h3>Apple Unveils the iPhone Duo Developer Transition Kit</h3>
+<p>In a major leap forward for iOS hardware form factors, Apple has officially initiated its Developer Transition Kit (DTK) program for the dual-screen "iPhone Duo". Targeted at early iOS developers and engineering teams, the kit provides prototype dual-display hardware paired with specialized beta tooling to prepare the App Store ecosystem ahead of general availability.</p>
+<h4>1. Dual-Display Hardware & Posture Sensor Suite</h4>
+<p>The developer unit features two identical 120Hz ProMotion OLED panels joined by a precision aerospace-grade titanium hinge. High-frequency angle encoders stream real-time posture changes (Book, Tent, Console, and Flat modes) directly to the OS without waking application CPU threads unnecessarily.</p>
+<h4>2. Xcode Dual-Display Simulator & 3D Hinge Emulation</h4>
+<p>Alongside hardware units, Apple seeded an updated Xcode preview containing a multi-screen simulator. Developers can drag an interactive 3D hinge slider on their Mac to test layout reflows, dual-pane master-detail transitions, and gesture drag-and-drop handoffs.</p>
+<h4>3. New SwiftUI Posture APIs</h4>
+<p>The accompanying SDK introduces <code>@Environment(\\.devicePosture)</code> and the <code>DualScreenLayout</code> container. Rather than stretching single-pane views across the central crease, Apple's Human Interface Guidelines recommend intelligent split-pane architectures where secondary displays adapt contextually to the task at hand.</p>`
+  },
+  {
     id: 'blog-1',
     title: 'Architecting Liquid Glass UI in SwiftUI: Apple Music & Control Center',
     tags: ['#SwiftUI', '#iOS', '#LiquidGlass', '#Metal', '#AppleHIG'],
@@ -526,12 +545,17 @@ class PortfolioDataStore {
       const updatedBlogs = [...storedBlogs];
       DEFAULT_BLOGS.forEach(defBlog => {
         if (!existingIds.has(defBlog.id)) {
-          updatedBlogs.push({ ...defBlog });
+          if (defBlog.id === 'blog-6') {
+            updatedBlogs.unshift({ ...defBlog });
+          } else {
+            updatedBlogs.push({ ...defBlog });
+          }
           existingIds.add(defBlog.id);
           modified = true;
         }
       });
       const blogTitleMigrations = {
+        'Architecting for iPhone Duo: SwiftUI Dual-Screen Geometry & Hinge Sensors': 'Apple Launches iPhone Duo Developer Kit: Dual-Screen SDK, Hinge Sensors & Xcode Simulator',
         'Crafting Apple Music Liquid Glass: 120Hz Animation Physics in SwiftUI': 'Architecting Liquid Glass UI in SwiftUI: Apple Music & Control Center',
         'Solar Ephemeris Algorithms: Computing Trigonometric Golden Hours in Swift': 'Precision Solar Ephemeris in Swift: The Math Powering SolX',
         'Autonomous AI Engineering: Compressing Days of iOS Refactoring into Minutes': 'The Agentic iOS Engineer: Antigravity, Claude Code & MCP'
@@ -539,6 +563,13 @@ class PortfolioDataStore {
       updatedBlogs.forEach(b => {
         if (blogTitleMigrations[b.title]) {
           b.title = blogTitleMigrations[b.title];
+          modified = true;
+        }
+        if (b.id === 'blog-6') {
+          b.title = 'Apple Launches iPhone Duo Developer Kit: Dual-Screen SDK, Hinge Sensors & Xcode Simulator';
+          b.tags = ['#TechNews', '#iPhoneDuo', '#AppleDevKit', '#SwiftUI', '#Xcode'];
+          b.readTime = '5 min read';
+          b.excerpt = 'Apple has officially opened developer transition kit applications for the anticipated iPhone Duo, introducing dual-viewport SwiftUI posture APIs, mechanical hinge angle sensors, and an all-new Xcode Dual-Display Simulator.';
           modified = true;
         }
         if (!b.tags || !Array.isArray(b.tags) || b.tags.length === 0 || b.category) {
