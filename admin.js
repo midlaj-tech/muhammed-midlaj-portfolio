@@ -990,6 +990,7 @@ function initProjectsStudio() {
   const modalBackdrop = document.getElementById('project-modal-backdrop');
   const form = document.getElementById('project-form');
   const openBtn = document.getElementById('open-add-project-btn');
+  const restoreBtn = document.getElementById('restore-default-projects-btn');
   const closeBtn = document.getElementById('close-project-modal');
   const cancelBtn = document.getElementById('cancel-project-btn');
   const descInput = document.getElementById('proj-desc');
@@ -1000,6 +1001,16 @@ function initProjectsStudio() {
   const WORD_LIMIT = 45;
   let customLogoData = null;
   let customCoverData = null;
+
+  if (restoreBtn) {
+    restoreBtn.addEventListener('click', () => {
+      showConfirmModal('Restore Default Projects', 'Restore default portfolio projects (including MMD One, SolX, and BREWME) to their standard order?', () => {
+        dataStore.restoreDefaultProjects();
+        renderProjects();
+        showToast('Default projects restored!');
+      });
+    });
+  }
 
   if (descInput && wordCounter) {
     descInput.addEventListener('input', () => {

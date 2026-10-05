@@ -939,6 +939,19 @@ function initDataSyncWithStore() {
           }
         }
       });
+
+      // Re-apply visibility: top 4 projects remain visible, 5th+ collapsed under toggle unless expanded
+      const isExpanded = projectsGrid?.classList.contains('is-expanded');
+      const allCards = projectsGrid?.querySelectorAll('.project-card');
+      if (allCards) {
+        allCards.forEach((card, idx) => {
+          if (idx >= 4 && !isExpanded) {
+            card.classList.add('is-extra-hidden');
+          } else {
+            card.classList.remove('is-extra-hidden');
+          }
+        });
+      }
     }
 
     // 5. Blogs order & content synchronization

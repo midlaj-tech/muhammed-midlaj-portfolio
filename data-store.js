@@ -480,7 +480,7 @@ class PortfolioDataStore {
       }
     }
 
-    // Auto-heal & Migrate Projects: Ensure all default projects exist
+    // Auto-heal & Migrate Projects: Ensure all default projects exist and canonical order is maintained
     const storedProjects = this.getItem(STORAGE_KEYS.PROJECTS);
     if (!storedProjects || !Array.isArray(storedProjects) || storedProjects.length === 0) {
       this.setItem(STORAGE_KEYS.PROJECTS, DEFAULT_PROJECTS);
@@ -488,9 +488,15 @@ class PortfolioDataStore {
       const existingIds = new Set(storedProjects.map(p => p.id));
       let modified = false;
       const updatedProjects = [...storedProjects];
-      DEFAULT_PROJECTS.forEach(defProj => {
+
+      // Auto-heal missing default projects at their intended positions
+      DEFAULT_PROJECTS.forEach((defProj, defIdx) => {
         if (!existingIds.has(defProj.id)) {
-          updatedProjects.push({ ...defProj });
+          if (defIdx < updatedProjects.length) {
+            updatedProjects.splice(defIdx, 0, { ...defProj });
+          } else {
+            updatedProjects.push({ ...defProj });
+          }
           existingIds.add(defProj.id);
           modified = true;
         }
@@ -530,6 +536,17 @@ class PortfolioDataStore {
           }
         }
       });
+
+      // Ensure MMD One is positioned in top 4 featured spots (canonical position: index 2)
+      const mmdIndex = updatedProjects.findIndex(p => p.id === 'project-mmd-one');
+      const brewmeIndex = updatedProjects.findIndex(p => p.id === 'project-brewme');
+      if (mmdIndex !== -1 && brewmeIndex !== -1 && mmdIndex > brewmeIndex) {
+        const [mmdItem] = updatedProjects.splice(mmdIndex, 1);
+        const newBrewmeIdx = updatedProjects.findIndex(p => p.id === 'project-brewme');
+        updatedProjects.splice(newBrewmeIdx, 0, mmdItem);
+        modified = true;
+      }
+
       if (modified) {
         this.setItem(STORAGE_KEYS.PROJECTS, updatedProjects);
       }
@@ -1073,6 +1090,11 @@ class PortfolioDataStore {
   reorderProjects(projects) {
     this.setItem(STORAGE_KEYS.PROJECTS, projects);
     return projects;
+  }
+
+  restoreDefaultProjects() {
+    this.setItem(STORAGE_KEYS.PROJECTS, DEFAULT_PROJECTS);
+    return DEFAULT_PROJECTS;
   }
 
   moveProject(fromIndex, toIndex) {
