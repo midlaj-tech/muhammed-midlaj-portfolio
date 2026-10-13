@@ -316,7 +316,7 @@ const DEFAULT_BLOGS = [
   {
     id: 'blog-6',
     title: 'Apple Launches iPhone Duo Developer Kit: Dual-Screen SDK, Hinge Sensors & Xcode Simulator',
-    tags: ['#TechNews', '#iPhoneDuo', '#AppleDevKit', '#SwiftUI', '#Xcode'],
+    tags: [],
     coverUrl: '/images/iphone-duo-dev.jpg',
     readTime: '5 min read',
     date: 'Oct 2026',
@@ -335,7 +335,7 @@ const DEFAULT_BLOGS = [
   {
     id: 'blog-1',
     title: 'Architecting Liquid Glass UI in SwiftUI: Apple Music & Control Center',
-    tags: ['#SwiftUI', '#iOS', '#LiquidGlass', '#Metal', '#AppleHIG'],
+    tags: [],
     coverUrl: '/images/ios-engineer-hero.jpg',
     readTime: '6 min read',
     date: 'Sep 2026',
@@ -350,7 +350,7 @@ const DEFAULT_BLOGS = [
   {
     id: 'blog-2',
     title: 'Precision Solar Ephemeris in Swift: The Math Powering SolX',
-    tags: ['#Swift', '#Algorithms', '#CoreLocation', '#SolarEphemeris', '#SIMD'],
+    tags: [],
     coverUrl: '/images/solx.jpg',
     readTime: '8 min read',
     date: 'Aug 2026',
@@ -365,7 +365,7 @@ const DEFAULT_BLOGS = [
   {
     id: 'blog-3',
     title: 'The Agentic iOS Engineer: Antigravity, Claude Code & MCP',
-    tags: ['#AI', '#AgenticCoding', '#Antigravity', '#ClaudeCode', '#MCP'],
+    tags: [],
     coverUrl: '/images/Antigravity.png',
     readTime: '5 min read',
     date: 'Jul 2026',
@@ -378,7 +378,7 @@ const DEFAULT_BLOGS = [
   {
     id: 'blog-4',
     title: 'CoreBluetooth & BLE Telemetry: Real-Time Hardware Sensor Streaming',
-    tags: ['#CoreBluetooth', '#BLE', '#Hardware', '#IoT', '#Swift'],
+    tags: [],
     coverUrl: '/images/powerboat-app.jpg',
     readTime: '7 min read',
     date: 'Jun 2026',
@@ -391,7 +391,7 @@ const DEFAULT_BLOGS = [
   {
     id: 'blog-5',
     title: 'High-Performance SwiftData: Multi-Threaded Sync & Faulting Optimization',
-    tags: ['#SwiftData', '#CoreData', '#Concurrency', '#Architecture', '#iOS'],
+    tags: [],
     coverUrl: '/images/solx.jpg',
     readTime: '6 min read',
     date: 'May 2026',
@@ -584,18 +584,15 @@ class PortfolioDataStore {
         }
         if (b.id === 'blog-6') {
           b.title = 'Apple Launches iPhone Duo Developer Kit: Dual-Screen SDK, Hinge Sensors & Xcode Simulator';
-          b.tags = ['#TechNews', '#iPhoneDuo', '#AppleDevKit', '#SwiftUI', '#Xcode'];
           b.readTime = '5 min read';
           b.excerpt = 'Apple has officially opened developer transition kit applications for the anticipated iPhone Duo, introducing dual-viewport SwiftUI posture APIs, mechanical hinge angle sensors, and an all-new Xcode Dual-Display Simulator.';
           modified = true;
         }
-        if (!b.tags || !Array.isArray(b.tags) || b.tags.length === 0 || b.category) {
-          const catMap = {
-            swiftui: ['#SwiftUI', '#iOS', '#LiquidGlass', '#Metal', '#AppleHIG'],
-            algorithms: ['#Swift', '#Algorithms', '#CoreLocation', '#SolarEphemeris', '#SIMD'],
-            ai: ['#AI', '#AgenticCoding', '#Antigravity', '#ClaudeCode', '#MCP']
-          };
-          b.tags = (b.tags && b.tags.length > 0) ? b.tags : (catMap[b.category] || ['#iOS', '#Swift', '#Mobile']);
+        if (b.tags && b.tags.length > 0) {
+          b.tags = [];
+          modified = true;
+        }
+        if (b.category) {
           delete b.category;
           modified = true;
         }

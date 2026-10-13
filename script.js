@@ -939,14 +939,6 @@ function initDataSyncWithStore() {
           if (imgEl && b.coverUrl) imgEl.src = b.coverUrl;
           if (timeEl && b.readTime) timeEl.textContent = b.readTime;
 
-          if (b.tags && Array.isArray(b.tags)) {
-            card.setAttribute('data-blog-tags', b.tags.join(' '));
-            const badgeEl = card.querySelector('.blog-overlay-badge .apple-pill-tag');
-            if (badgeEl && b.tags[0]) {
-              badgeEl.textContent = b.tags[0];
-            }
-          }
-
           if (blogsGrid && card.parentElement === blogsGrid) {
             blogsGrid.appendChild(card);
           }

@@ -2222,8 +2222,20 @@ ul {
   transform: scale(1.06);
 }
 
-.blog-overlay-badge {
+.blog-overlay-badge,
+.blog-tags,
+.blog-tag,
+#blog-filter-group,
+.blog-filter-toolbar,
+[data-blog-tags] .blog-tags {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .blog-content {
@@ -2262,10 +2274,6 @@ ul {
   letter-spacing: -0.015em;
   color: var(--text-primary);
   margin-bottom: 12px;
-}
-
-.blog-tags {
-  display: none !important;
 }
 
 .blog-excerpt {
@@ -3397,6 +3405,7 @@ ul {
     height: 58px;
     gap: 8px;
     box-sizing: border-box;
+    will-change: auto;
   }
 
   .glass-nav.is-condensed {
@@ -3557,16 +3566,16 @@ ul {
 
   .nav-links-container {
     position: fixed;
-    top: calc(var(--nav-height) + 16px + env(safe-area-inset-top, 0px));
+    top: calc(var(--nav-height) + 12px + env(safe-area-inset-top, 0px));
     left: 12px;
     right: 12px;
-    background: var(--glass-bg-dense);
+    background: rgba(13, 13, 19, 0.98) !important;
     backdrop-filter: blur(40px) saturate(220%);
     -webkit-backdrop-filter: blur(40px) saturate(220%);
-    border: 1px solid var(--nav-glass-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--glass-shadow-hover);
-    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 18px !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08) !important;
+    padding: 10px !important;
     display: none;
     flex-direction: column;
     z-index: 101;
@@ -3574,28 +3583,31 @@ ul {
   }
 
   :root[data-theme="dark"] .nav-links-container {
-    background: rgba(16, 16, 24, 0.85);
-    border-color: rgba(255, 255, 255, 0.18);
+    background: rgba(13, 13, 19, 0.98) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
   }
 
   :root[data-theme="light"] .nav-links-container {
-    background: rgba(248, 248, 252, 0.9);
-    border-color: rgba(255, 255, 255, 0.65);
+    background: rgba(250, 250, 254, 0.98) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.14) !important;
   }
 
   .nav-links-container.is-open {
-    display: flex;
+    display: flex !important;
   }
 
   #desktop-nav-links,
   .nav-links,
   :root[data-theme="dark"] .nav-links,
   :root[data-theme="light"] .nav-links {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 6px;
-    padding: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    margin: 0 !important;
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
@@ -3609,12 +3621,39 @@ ul {
     display: none !important;
   }
 
-  .nav-link {
-    height: 46px;
-    padding: 0 20px;
-    border-radius: 9999px; /* Pure glass capsule shape instead of squircle */
-    font-size: 0.94rem;
-    justify-content: flex-start;
+  .nav-link,
+  :root[data-theme="dark"] .nav-link,
+  :root[data-theme="light"] .nav-link {
+    height: 44px !important;
+    padding: 0 16px !important;
+    border-radius: 12px !important;
+    font-size: 0.94rem !important;
+    font-weight: 500 !important;
+    justify-content: flex-start !important;
+    border: 1px solid transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: var(--text-secondary) !important;
+    transform: none !important;
+  }
+
+  .nav-link:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-primary) !important;
+    transform: none !important;
+    border-radius: 12px !important;
+  }
+
+  .nav-link.active,
+  :root[data-theme="dark"] .nav-link.active,
+  :root[data-theme="light"] .nav-link.active {
+    background: rgba(250, 45, 72, 0.16) !important;
+    color: #ff3b56 !important;
+    font-weight: 700 !important;
+    border: 1px solid rgba(250, 45, 72, 0.3) !important;
+    border-radius: 12px !important;
+    box-shadow: none !important;
+    transform: none !important;
   }
 
   .hero-headline {
