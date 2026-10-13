@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeroAvatarScrollAnimation();
   initSkillsSegmentedControl();
   initProjectsFilter();
-  initBlogFilter();
   initExpandToggles();
   initModalSheets();
   initCopyChannels();
@@ -375,49 +374,7 @@ function initProjectsFilter() {
   });
 }
 
-/* ==========================================================================
-   6B. BLOGS HASHTAG & TAGS FILTER
-   ========================================================================== */
-function initBlogFilter() {
-  const filterButtons = document.querySelectorAll('#blog-filter-group [data-blog-tag]');
-  const blogCards = document.querySelectorAll('.blog-card');
-  const blogsGrid = document.querySelector('.blogs-grid');
-  const expandBtn = document.getElementById('toggle-all-blogs-btn');
-  if (!filterButtons.length || !blogCards.length) return;
 
-  filterButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterTag = (btn.getAttribute('data-blog-tag') || 'all').toLowerCase();
-
-      if (filterTag === 'all') {
-        const isExpanded = blogsGrid?.classList.contains('is-expanded');
-        blogCards.forEach((card, idx) => {
-          card.classList.remove('is-hidden');
-          if (idx >= 3 && !isExpanded) {
-            card.classList.add('is-extra-hidden');
-          } else {
-            card.classList.remove('is-extra-hidden');
-          }
-        });
-        if (expandBtn) expandBtn.style.display = blogCards.length > 3 ? 'inline-flex' : 'none';
-      } else {
-        blogCards.forEach((card) => {
-          const cardTags = (card.getAttribute('data-blog-tags') || '').toLowerCase();
-          if (cardTags.includes(filterTag)) {
-            card.classList.remove('is-hidden');
-            card.classList.remove('is-extra-hidden');
-          } else {
-            card.classList.add('is-hidden');
-          }
-        });
-        if (expandBtn) expandBtn.style.display = 'none';
-      }
-    });
-  });
-}
 
 /* ==========================================================================
    6C. EXPAND & VIEW ALL TOGGLES (PROJECTS & BLOGS)
@@ -808,7 +765,8 @@ function initMobileMenu() {
   const menu = document.getElementById('nav-menu');
   if (!toggleBtn || !menu) return;
 
-  toggleBtn.addEventListener('click', () => {
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = menu.classList.toggle('is-open');
     toggleBtn.setAttribute('aria-expanded', String(isOpen));
   });
@@ -818,6 +776,14 @@ function initMobileMenu() {
       menu.classList.remove('is-open');
       toggleBtn.setAttribute('aria-expanded', 'false');
     });
+  });
+
+  // Close menu when tapping anywhere outside
+  document.addEventListener('click', (e) => {
+    if (menu.classList.contains('is-open') && !menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+      menu.classList.remove('is-open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
   });
 }
 
@@ -975,10 +941,6 @@ function initDataSyncWithStore() {
 
           if (b.tags && Array.isArray(b.tags)) {
             card.setAttribute('data-blog-tags', b.tags.join(' '));
-            const tagsContainer = card.querySelector('.blog-tags');
-            if (tagsContainer) {
-              tagsContainer.innerHTML = b.tags.slice(0, 5).map(t => `<span class="tech-tag">${escapeHtml(t)}</span>`).join('');
-            }
             const badgeEl = card.querySelector('.blog-overlay-badge .apple-pill-tag');
             if (badgeEl && b.tags[0]) {
               badgeEl.textContent = b.tags[0];
